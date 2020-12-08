@@ -2,12 +2,7 @@ library(ggplot2)
 library(dplyr)
 library(stringr)
 
-#dane2 = mutate(dane, country = geo)
-x = c()
-for (i in seq(1:nrow(dane))) {
-  kod = as.character(dane$geo[i])
-  x = c(x, str_sub(kod, 1, 2))
-}
-dane = cbind(dane, as.data.frame(x))
+dane = mutate(dane, country = str_sub(geo, 1, 2))
 
 ggplot(dane, aes(x = x, y = values)) + geom_boxplot()
+ggplot(dane, aes(x = values)) + geom_histogram(binwidth = 0.05)
