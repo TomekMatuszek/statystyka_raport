@@ -29,5 +29,3 @@ map2 = tm_shape(map_data, is.master = TRUE) +
   tm_compass(type = "rose", position = c("left", "bottom"),
              color.light = "gray40", size = 4)
 map2
-?tm_layout
-?tm_polygons
