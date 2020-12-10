@@ -31,9 +31,15 @@ ggplot(dane_regiony, aes(x = region, y = values, col = region)) +
         panel.background = element_rect(fill = "gray20"),
         axis.text = element_text(size = 12, color = "#eeeeee"),
         axis.title.x = element_text(color = "#eeeeee")) +
-  geom_hline(yintercept = mean(dane$values), color = "darkred", size = 1.5) +
+  geom_hline(yintercept = median(dane$values), color = "darkred", size = 1.5) +
   geom_jitter(size = 2, alpha = 0.5, width = 0.3) +
-  stat_summary(fun = mean, geom = "point", size = 8)
+  stat_summary(fun = median, geom = "point", size = 8)
   
   
-ggplot(dane_regiony, aes(x = values)) + geom_histogram(binwidth = 0.05)
+ggplot(dane_regiony, aes(x = values)) + 
+  geom_histogram(binwidth = 0.05, color = "gray50", fill = "gray50") +
+  labs(x = "Wspolczynnik dzietnosci", y = element_blank()) +
+  theme(plot.background = element_rect(fill = "gray25"),
+        panel.background = element_rect(fill = "gray20"),
+        axis.text = element_text(size = 12, color = "#eeeeee"),
+        axis.title.x = element_text(color = "#eeeeee"))
