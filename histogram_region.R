@@ -48,11 +48,11 @@ dane_regiony = dane_regiony[-c(1:7), ]
 ggplot(dane_regiony, aes(x=values,
                          fill = region
                          )) + 
-geom_histogram(data=subset(dane_regiony, region == 'Europa Wschodnia'),color = "#222222", alpha = 0.4, binwidth = 0.05) +
-geom_histogram(data=subset(dane_regiony, region == 'Skandynawia'),color = "#222222", alpha = 0.4, binwidth = 0.05) +
-geom_histogram(data=subset(dane_regiony, region == 'Europa Zachodnia'),color = "#222222", alpha = 0.4, binwidth = 0.05) +
-geom_histogram(data=subset(dane_regiony, region == 'Europa Środkowa'),color = "#222222", alpha = 0.4, binwidth = 0.05) +
-geom_histogram(data=subset(dane_regiony, region == 'Bałkany'),color = "#222222", alpha = 0.4, binwidth = 0.05) + 
+geom_histogram(data=subset(dane_regiony, region == 'Europa Wschodnia'), color = "#222222", alpha = 0.4, binwidth = 0.05) +
+geom_histogram(data=subset(dane_regiony, region == 'Skandynawia'), color = "#222222", alpha = 0.4, binwidth = 0.05) +
+geom_histogram(data=subset(dane_regiony, region == 'Europa Zachodnia'), color = "#222222", alpha = 0.4, binwidth = 0.05) +
+geom_histogram(data=subset(dane_regiony, region == 'Europa Środkowa'), color = "#222222", alpha = 0.4, binwidth = 0.05) +
+geom_histogram(data=subset(dane_regiony, region == 'Bałkany'), color = "#222222", alpha = 0.4, binwidth = 0.05) + 
 labs(x = "Średnia dzietność", 
      y = "Liczba państw",
      fill = 'Region' ) + 
