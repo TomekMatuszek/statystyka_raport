@@ -11,8 +11,8 @@ map_data = filter(map_data, geo != "FRY5", geo != "FRY3", geo != "FRY4",
                   geo != "PT2", geo != "PT20", geo != "PT3", geo != "PT30")
 
 map2 = tm_shape(map_data, is.master = TRUE) +
-  tm_polygons("values", n = 7, title = "", 
-              border.col = "black",
+  tm_polygons("values", n = 7, 
+              border.col = "gray20",
               palette = "viridis",
               breaks = c(1, 1.2, 1.4, 1.6, 1.8, 2, Inf),
               legend.hist = TRUE) +
