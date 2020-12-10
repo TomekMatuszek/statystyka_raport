@@ -1,5 +1,6 @@
-install.packages("tmap")
+#install.packages("tmap")
 library(tmap)
+library(eurostat)
 geodata = get_eurostat_geospatial(output_class = "sf",
                                    resolution = "60",
                                    nuts_level = 2,
