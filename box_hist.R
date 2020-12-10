@@ -1,0 +1,13 @@
+library(ggplot2)
+library(dplyr)
+library(stringr)
+
+dane = mutate(dane, country = str_sub(geo, 1, 2))
+
+ggplot(map_data, aes(x = country, y = values)) +
+  coord_flip() +
+  geom_hline(yintercept = mean(map_data$values), color = "red",
+             size = 1) +
+  geom_boxplot() 
+  
+ggplot(dane, aes(x = values)) + geom_histogram(binwidth = 0.05)
