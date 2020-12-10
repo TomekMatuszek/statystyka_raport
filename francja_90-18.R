@@ -10,14 +10,8 @@ fr = get_eurostat("demo_r_frate2", type = "code", time_format = "date",
 fr = select(fr, Data = `time`, Wartość = `values`)
 fr$Data = str_replace(fr$Data, "-01-01", "")
 
-p = ggplot(fr, aes(x = Data, y = Wartość)) + geom_bar(stat='identity')
-p = p +  
+
+ggplot(fr, aes(Data, Wartość, group = 1)) + geom_line(color = 'dodgerblue3', size = 1.5) +
   theme_bw() +
   theme(axis.title.x = element_blank()) +
-  coord_cartesian(ylim = c(1.5, 2.1)) +
-  scale_y_continuous(breaks=seq(1.6,2.1,0.2)) +
-  
   labs(title = "Współczynnik dzietności we Francji", subtitle = 'Lata 1990-2018')
-p
-
-
