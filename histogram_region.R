@@ -5,40 +5,27 @@ library(stringr)
 #potrzebne dane z pliku pobieranie_danych 
 
 dane = mutate(dane, country = str_sub(geo, 1, 2))
-
+dane = filter(dane, geo != "FRY5", geo != "FRY3", geo != "FRY4", 
+              geo != "FRY2", geo != "FRY1", geo != "ES7", geo != "ES70", 
+              geo != "PT2", geo != "PT20", geo != "PT3", geo != "PT30")
 dane_regiony = mutate(dane, region = str_replace_all(country, c("BG" = "Bałkany",
 "EL" = "Bałkany",  "HR" = "Bałkany", "SI" = "Bałkany", "RS" = "Bałkany", 
-"ME" = "Bałkany", "MK" = "Bałkany", "BA" = "Bałkany", "XK" = "Bałkany", 
-"IT" = "Bałkany", "AL" = "Bałkany", "MT" = "Bałkany",
-"DK" = "Skandynawia", "NO" = "Skandynawia", "FI" = "Skandynawia",
-"SE" = "Skandynawia", "IS" = "Skandynawia", "IE" = "Europa Zachodnia",
+"ME" = "Bałkany", "MK" = "Bałkany", 
+"IT" = "Europa Południowa", "AL" = "Bałkany", "MT" = "Europa Południowa",
+"DK" = "Europa Północna", "NO" = "Europa Północna", "FI" = "Europa Północna",
+"SE" = "Europa Północna", "IS" = "Europa Północna", "IE" = "Europa Zachodnia",
 "BE" = "Europa Zachodnia", "UK" = "Europa Zachodnia", "FR" = "Europa Zachodnia",
-"LU" = "Europa Zachodnia", "NL" = "Europa Zachodnia", "ES" = "Europa Zachodnia", 
-"CY" = "Europa Zachodnia", "PT" = "Europa Zachodnia","CZ" = "Europa Środkowa", 
+"LU" = "Europa Zachodnia", "NL" = "Europa Zachodnia", "ES" = "Europa Południowa", 
+"CY" = "Europa Południowa", "PT" = "Europa Południowa","CZ" = "Europa Środkowa", 
 "DE" = "Europa Środkowa", "PL" = "Europa Środkowa", "AT" = "Europa Środkowa",
 "HU" = "Europa Środkowa", "SK" = "Europa Środkowa", "LI" = "Europa Środkowa",
-"CH" = "Europa Środkowa", "SI" = "Europa Środkowa", "EE" = "Europa Wschodnia",
-"LT" = "Europa Wschodnia", "BG" = "Europa Wschodnia", "LV" = "Europa Wschodnia", 
-"RO" = "Europa Wschodnia", "BY" = "Europa Wschodnia", "UA" = "Europa Wschodnia", 
-"MD" = "Europa Wschodnia", "TR" = "Europa Wschodnia")))
-View(dane_regiony)
-
+"CH" = "Europa Zachodnia", "SI" = "Europa Środkowa", "EE" = "Europa Północna",
+"LT" = "Europa Północna", "LV" = "Europa Północna", 
+"RO" = "Bałkany", "TR" = "Europa Południowa")))
 
 #srednia dzietnosci dla poszczegolnych regionow
 grupy = group_by(dane_regiony, region)
 grupy_summary =  summarize(grupy, srednia = mean(values))
-View(grupy_summary)
-
-#gowno na szybko
-ggplot(data = grupy_summary, aes(x = srednia, y = region)) + 
-  geom_col()
-
-#srednie dzietnosci dla poszczegolnych regionow 
-#sr_balkany = grupy_summary[1, ]
-#sr_europa_srodkowa = grupy_summary[2, ]
-#sr_europa_wschodnia = grupy_summary[3, ]
-#sr_europa_zachodnia = grupy_summary[4, ]
-#sr_skandynawia = grupy_summary[5, ]
 
 #obciecie wystających wartosci dla lepszej widocznosci histogramow
 dane_regiony = arrange(dane_regiony, desc(values))
@@ -46,11 +33,10 @@ dane_regiony = dane_regiony[-c(1:7), ]
 
 
 ggplot(dane_regiony, aes(x=values,
-                         fill = region
-                         )) +
+                         fill = region)) +
   scale_fill_manual(values = c("tomato", "coral4", "chartreuse4", "dodgerblue3", "violetred3")) +
-  geom_histogram(data=subset(dane_regiony, region == 'Europa Wschodnia'), alpha = 0.4, binwidth = 0.05) +
-  geom_histogram(data=subset(dane_regiony, region == 'Skandynawia'), alpha = 0.4, binwidth = 0.05) +
+  geom_histogram(data=subset(dane_regiony, region == 'Europa Południowa'), alpha = 0.4, binwidth = 0.05) +
+  geom_histogram(data=subset(dane_regiony, region == 'Europa Północna'), alpha = 0.4, binwidth = 0.05) +
   geom_histogram(data=subset(dane_regiony, region == 'Europa Zachodnia'), alpha = 0.4, binwidth = 0.05) +
   geom_histogram(data=subset(dane_regiony, region == 'Europa Środkowa'), alpha = 0.4, binwidth = 0.05) +
   geom_histogram(data=subset(dane_regiony, region == 'Bałkany'), alpha = 0.4, binwidth = 0.05) + 
