@@ -17,11 +17,11 @@ map2 = tm_shape(map_data, is.master = TRUE) +
               breaks = c(1, 1.2, 1.4, 1.6, 1.8, 2, Inf),
               legend.hist = TRUE) +
   tm_layout(frame.lwd = 1, bg.color = "gray25", attr.color = "black",
-            legend.position = c(0.79, 0.3),
+            legend.position = c(0.79, 0.29),
             #legend.position = c(0.01, 0.01),
             legend.frame = TRUE,
             legend.text.size = 1,
-            legend.title.size = 1.1,
+            legend.title.size = 1.15,
             legend.hist.width = 0.2,
             legend.hist.height = 0.2,
             legend.hist.bg.color = "gray40",
