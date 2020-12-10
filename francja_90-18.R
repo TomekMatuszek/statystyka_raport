@@ -12,6 +12,13 @@ fr$Data = str_replace(fr$Data, "-01-01", "")
 
 
 ggplot(fr, aes(Data, Wartość, group = 1)) + geom_line(color = 'dodgerblue3', size = 1.5) +
-  theme_bw() +
-  theme(axis.title.x = element_blank()) +
-  labs(title = "Współczynnik dzietności we Francji", subtitle = 'Lata 1990-2018')
+  theme(plot.background = element_rect(fill = "gray25"), 
+        panel.background = element_rect(fill = "gray20"),
+        axis.title.x = element_blank(),
+        axis.title = element_text(size = 15, color = "#eeeeee"), 
+        axis.text = element_text(size = 12,  color = "#eeeeee")) 
+
+                            
+                            
+                            
+                            
