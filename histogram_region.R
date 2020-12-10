@@ -47,16 +47,17 @@ dane_regiony = dane_regiony[-c(1:7), ]
 
 ggplot(dane_regiony, aes(x=values,
                          fill = region
-                         )) + 
-geom_histogram(data=subset(dane_regiony, region == 'Europa Wschodnia'), alpha = 0.4, binwidth = 0.05) +
-geom_histogram(data=subset(dane_regiony, region == 'Skandynawia'), alpha = 0.4, binwidth = 0.05) +
-geom_histogram(data=subset(dane_regiony, region == 'Europa Zachodnia'), alpha = 0.4, binwidth = 0.05) +
-geom_histogram(data=subset(dane_regiony, region == 'Europa Środkowa'), alpha = 0.4, binwidth = 0.05) +
-geom_histogram(data=subset(dane_regiony, region == 'Bałkany'), alpha = 0.4, binwidth = 0.05) + 
-labs(x = "Średnia dzietność", 
+                         )) +
+  scale_fill_manual(values = c("orange", "black", "darkgreen", "blue", "red")) +
+  geom_histogram(data=subset(dane_regiony, region == 'Europa Wschodnia'), alpha = 0.4, binwidth = 0.05) +
+  geom_histogram(data=subset(dane_regiony, region == 'Skandynawia'), alpha = 0.4, binwidth = 0.05) +
+  geom_histogram(data=subset(dane_regiony, region == 'Europa Zachodnia'), alpha = 0.4, binwidth = 0.05) +
+  geom_histogram(data=subset(dane_regiony, region == 'Europa Środkowa'), alpha = 0.4, binwidth = 0.05) +
+  geom_histogram(data=subset(dane_regiony, region == 'Bałkany'), alpha = 0.4, binwidth = 0.05) + 
+  labs(x = "Średnia dzietność", 
      y = "Liczba państw",
      fill = 'Region' ) + 
-theme(
+  theme(
     plot.background = element_rect(fill = "#252525"), 
     panel.background = element_rect(fill = "#555555"), 
     axis.title = element_text(size = 15,
