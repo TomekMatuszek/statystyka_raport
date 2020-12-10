@@ -17,7 +17,7 @@ map2 = tm_shape(map_data, is.master = TRUE) +
               legend.hist = TRUE) +
   tm_layout(frame.lwd = 2, bg.color = "gray95", attr.color = "black",
             legend.position = c(0.8, 0.3),
-            legend.text.size = 1.2,
+            legend.text.size = 1,
             legend.hist.width = 0.2,
             legend.hist.height = 0.2)
 map2
