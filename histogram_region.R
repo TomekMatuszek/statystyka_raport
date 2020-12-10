@@ -48,7 +48,7 @@ dane_regiony = dane_regiony[-c(1:7), ]
 ggplot(dane_regiony, aes(x=values,
                          fill = region
                          )) +
-  scale_fill_manual(values = c("orange", "black", "darkgreen", "blue", "red")) +
+  scale_fill_manual(values = c("tomato", "coral4", "chartreuse4", "dodgerblue3", "violetred3")) +
   geom_histogram(data=subset(dane_regiony, region == 'Europa Wschodnia'), alpha = 0.4, binwidth = 0.05) +
   geom_histogram(data=subset(dane_regiony, region == 'Skandynawia'), alpha = 0.4, binwidth = 0.05) +
   geom_histogram(data=subset(dane_regiony, region == 'Europa Zachodnia'), alpha = 0.4, binwidth = 0.05) +
@@ -58,14 +58,14 @@ ggplot(dane_regiony, aes(x=values,
      y = "Liczba państw",
      fill = 'Region' ) + 
   theme(
-    plot.background = element_rect(fill = "#252525"), 
-    panel.background = element_rect(fill = "#555555"), 
+    plot.background = element_rect(fill = "gray25"), 
+    panel.background = element_rect(fill = "gray20"), 
     axis.title = element_text(size = 15,
                               color = "#eeeeee"), 
     legend.background = element_rect(color = "#222222", 
-                                     fill = "#777777"),  
-    legend.title = element_text(size = 13),
-    legend.text = element_text(size = 12),
+                                     fill = "gray30"),  
+    legend.title = element_text(size = 13, colour = "#eeeeee"),
+    legend.text = element_text(size = 12, colour = "#eeeeee"),
     axis.text = element_text(size = 12, 
                              color = "#eeeeee"),
     axis.title.x = element_text(vjust = 0))
