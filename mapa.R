@@ -16,7 +16,7 @@ map2 = tm_shape(map_data, is.master = TRUE) +
               palette = "viridis",
               breaks = c(1, 1.2, 1.4, 1.6, 1.8, 2, Inf),
               legend.hist = TRUE) +
-  tm_layout(frame.lwd = 1, bg.color = "gray90", attr.color = "black",
+  tm_layout(frame.lwd = 1, bg.color = "gray25", attr.color = "black",
             legend.position = c(0.79, 0.3),
             #legend.position = c(0.01, 0.01),
             legend.frame = TRUE,
@@ -24,8 +24,10 @@ map2 = tm_shape(map_data, is.master = TRUE) +
             legend.title.size = 1.1,
             legend.hist.width = 0.2,
             legend.hist.height = 0.2,
-            legend.hist.bg.color = "gray60") +
-  tm_compass(type = "4star", position = c("left", "bottom"))
+            legend.hist.bg.color = "gray40",
+            legend.bg.color = "gray40") +
+  tm_compass(type = "rose", position = c("left", "bottom"),
+             color.light = "gray40", size = 4)
 map2
 ?tm_layout
 ?tm_polygons
