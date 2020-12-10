@@ -55,7 +55,7 @@ summary2012 =  summarize(dane2012_grouped, srednia = as.numeric(mean(values, na.
 summary2014 =  summarize(dane2014_grouped, srednia = as.numeric(mean(values, na.rm = TRUE)))
 summary2016 =  summarize(dane2016_grouped, srednia = as.numeric(mean(values, na.rm = TRUE)))
 summary2018 =  summarize(dane2018_grouped, srednia = as.numeric(mean(values, na.rm = TRUE)))
-View(summary2008)
+
 
 
   
@@ -79,8 +79,7 @@ skandynawia = as.data.frame(matrix(as.numeric(c(summary2008[5, 2], summary2010[5
                        summary2012[5, 2], summary2014[5, 2],
                        summary2016[5, 2], summary2018[5, 2])), ncol=1,byrow=TRUE))
 
-
-View(skandynawia)
+View(sk)
 
 skandynawia = mutate(skandynawia, rok = as.character(c(2008, 2010, 2012, 2014, 2016, 2018)))
 europa_wsch = mutate(europa_wsch, rok = as.character(c(2008, 2010, 2012, 2014, 2016, 2018)))
@@ -94,8 +93,6 @@ colnames(europa_wsch) = c("srednia", "rok")
 colnames(europa_zach) = c("srednia", "rok")
 colnames(skandynawia) = c("srednia", "rok")
 
-skandynawia = skandynawia[as.integer(2, 1)]
-
 
 skandynawia = mutate(skandynawia, region = "Skandynawia")
 europa_wsch = mutate(europa_wsch, region = "Europa Wschodnia")
@@ -105,7 +102,6 @@ balkany= mutate(balkany, region = "Bakany")
 
 regiony = rbind(skandynawia, balkany, europa_wsch, europa_zach, europa_sr)
 
-View(regiony)
 
 ggplot(regiony, aes(rok, srednia, group = region, color = region)) + 
   geom_line(size = 1.8) + 
