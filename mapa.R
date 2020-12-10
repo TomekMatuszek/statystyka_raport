@@ -10,13 +10,13 @@ map_data = filter(map_data, geo != "FRY5", geo != "FRY3", geo != "FRY4",
                   geo != "PT2", geo != "PT20", geo != "PT3", geo != "PT30")
 
 map2 = tm_shape(map_data, is.master = TRUE) +
-  tm_polygons("values", n = 3, 
+  tm_polygons("values", n = 3, title = "",
               palette = "YlOrRd", 
               border.col = "black",
               breaks = c(1, 1.2, 1.4, 1.6, 1.8, 2)) +
-  tm_layout(title = "", frame.lwd = 2, bg.color = "gray90", attr.color = "black",
-            legend.position = c("left", "bottom"),
-            legend.text.size = 1.5)
+  tm_layout(frame.lwd = 2, bg.color = "gray90", attr.color = "black",
+            legend.position = c(0.82, 0.4),
+            legend.text.size = 1.2)
 map2
 ?tm_layout
 ?tm_polygons
