@@ -7,9 +7,9 @@ output:
 ---
 
 ## **1. Wprowadzenie**
-**Współczynnik dzietności** (ang. *fertility rate*) określa przeciętną liczbę dzieci, które urodziłaby kobieta w ciągu całego okresu rozrodczego (15-49 lat), przy założeniu, że w poszczególnych fazach tego okresu rodziłaby z intensywnością obserwowaną wśród kobiet w badanym roku. Przyjmuje się, iż współczynnik dzietności między 2,10 a 2,15 jest wartością zapewniającą prostą zastępowalność pokoleń (czyli utrzymanie liczby ludności populacji).
+**Współczynnik dzietności** (ang. *fertility rate*) określa przeciętną liczbę dzieci, którą urodziłaby kobieta w ciągu całego okresu rozrodczego (15-49 lat), przy założeniu, że w poszczególnych fazach tego okresu rodziłaby z intensywnością obserwowaną wśród kobiet w badanym roku. Przyjmuje się, iż współczynnik dzietności między 2,10 a 2,15 jest wartością zapewniającą prostą zastępowalność pokoleń (czyli utrzymanie liczby ludności populacji).
 
-Celem niniejszej analizy jest scharakteryzowanie współczynnika dzietności w 37 krajach Europy podzielonych na **jednostki NUTS 2**, dla których Eurostat zbiera dane w tej dziedzinie. Dane dotyczą roku 2018, a także trendów zmian od końca XX wieku. W pierwszym etapie przeprowadzono analizę dla wszystkich jednostek, a następnie w podziale na regiony kontynentu (Europę Północną, Zachodnią, Środkową, Południową oraz Bałkany).[Mapa](https://dl.dropboxusercontent.com/s/jval7cjcnwikmn0/Legenda.jpg?dl=0) obrazująca dokonany przez autorów podział Europy na regiony.
+Celem niniejszej analizy jest scharakteryzowanie współczynnika dzietności w 37 krajach Europy podzielonych na **jednostki NUTS 2**, dla których Eurostat zbiera dane w tej dziedzinie. Dane dotyczą roku 2018, a także trendów zmian od końca XX wieku. W pierwszym etapie przeprowadzono analizę dla wszystkich jednostek, a następnie w podziale na regiony kontynentu (Europę Północną, Zachodnią, Środkową, Południową oraz Bałkany). [Mapa](https://dl.dropboxusercontent.com/s/jval7cjcnwikmn0/Legenda.jpg?dl=0) obrazująca dokonany przez autorów podział Europy na regiony.
 
 ## **2. Dane**
 Analizę przeprowadzono w oparciu o dane dotyczące współczynnika dzietności w krajach europejskich dostępnych na stronie Eurostatu. Dane te dostarczają informacji o liczbie dzieci, które przeciętna kobieta rodzi w swoim życiu w podziale na jednostki NUTS2. [Link do danych](https://ec.europa.eu/eurostat/databrowser/view/demo_r_frate2/default/table?lang=en)
@@ -62,7 +62,7 @@ nrow(dane[dane$values > 2.1, ])
 
 Według danych pozyskanych z Eurostatu, współczynnik dzietności w krajach Europy (dla których Eurostat zbiera dane) mieścił się w przedziale 1,02 - 3,57 dziecka na kobietę. **Średnia i mediana** dla tego współczynnika są prawie identyczne - obydwie wynoszą 1,6 przy odchyleniu standardowym równym 0.28 (co oznacza że 68% jednostek NUTS 2 ma współczynnik dzietności w przedziale 1,32 - 1,88). Najwięcej urodzeń na jedną kobietę **(3,57)** przypada w regionie Sanliurfa w Turcji, natomiast najmniej **(1,02)** - na Sardynii we Włoszech. Po obliczeniu wartości kwartylnych okazało się, że w 75% regionów współczynnik dzietności wynosi ponad 1,44, a 1/4 regionów przekracza wartość 1,72. Tylko w 7 regionach współczynnik dzietności przekracza wartość zapewniającą zastępowalność pokoleń, czyli 2,1.
 
-Rozkład przestrzenny tych wartości zobrazowano na poniższej mapie (ryc. 1). Przedstawia ona jednostki NUTS 2 wraz z wartościami współczynnika dzietności.Pod legendą dodano także histogram dla omawianych danych.
+Rozkład przestrzenny tych wartości zobrazowano na poniższej mapie (ryc. 1). Przedstawia ona jednostki NUTS 2 wraz z wartościami współczynnika dzietności. Pod legendą dodano także histogram dla omawianych danych.
 
 ```{r message=FALSE, warning=FALSE}
 library(tmap)
@@ -188,7 +188,7 @@ ggplot(dane_regiony, aes(x=values, fill = region)) +
 
 *Ryc. 3 Nałożone na siebie histogramy obrazujące rozkład wartości współczynnika dzietności dla poszczególnych regionów Europy.*
 
-Analizując powyższe wykresy (ryc. 2 i ryc. 3) można zauważyć, że większość regionów Europy ma w miarę równomierny rozkład wartości współczynnika dzietności, a także medianę zbliżoną do mediany całego kontynentu. Jedynym regionem, którego mediana znacząco się różni od mediany europejskiej jest Europa Południowa. Hiszpania, Włochy i Grecja są bowiem krajami, w których żadnym regionie współczynnik dzietności nie przekracza 1,4. Europa Południowa ma też największy rozrzut wartości ze wszystkich regionów z tego powodu, że została do niej zaliczona także Turcja która w przeciwieństwie do innych krajów śródziemnomorskich charakteryzuje się stosunkowo wysoką dzietnością (szczególnie w regionach południowo-wschodnich). Z histogramu można też wywnioskować, że kraje Europy Zachodniej nie mają aż takich problemów z dzietnością jak ich południowi sąsiedzi. Generalnie jednak, rozkład wartości na histogramie można określić jako zbliżony do normalnego.
+Analizując powyższe wykresy (ryc. 2 i ryc. 3) można zauważyć, że większość regionów Europy ma w miarę równomierny rozkład wartości współczynnika dzietności, a także medianę zbliżoną do mediany całego kontynentu. Jedynym regionem, którego mediana znacząco się różni od mediany europejskiej jest Europa Południowa. Hiszpania, Włochy i Grecja są bowiem krajami, w których żadnym regionie współczynnik dzietności nie przekracza 1,4. (ryc. 1) Europa Południowa ma też największy rozrzut wartości ze wszystkich regionów z tego powodu, że została do niej zaliczona także Turcja która w przeciwieństwie do innych krajów śródziemnomorskich charakteryzuje się stosunkowo wysoką dzietnością (szczególnie w regionach południowo-wschodnich). Z histogramu można też wywnioskować, że kraje Europy Zachodniej nie mają aż takich problemów z dzietnością jak ich południowi sąsiedzi. Generalnie jednak, rozkład wartości na histogramie można określić jako zbliżony do normalnego.
 
 ``` {r message=FALSE, warning=FALSE}
 library(eurostat)
