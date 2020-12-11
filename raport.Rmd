@@ -316,3 +316,23 @@ ggplot(fr, aes(Data, Wartość, group = 1)) + geom_line(color = 'dodgerblue3', s
 Przeprowadzona analiza współczynnika dzietności w Europie ukazała, że istnieją pewne regionalne różnice w jego rozkładzie przestrzennym. Państwa śródziemnomorskie okazały się mieć dramatycznie niską zastępowalność pokoleń oraz silnie kontrastować z innym państwem śródziemnomorskim – Turcją. W innych częściach kontynentu zróżnicowanie dzietności jest mniejsze, a także współczynnik ten przyjmuje generalnie wyższe wartości. Najlepiej sytuacja wygląda we Francji, Szwecji, Irlandii oraz wschodniej części Rumunii. Polska na tle Europy jawi się jako kraj o średniej wysokości współczynnika dzietności – jest on niższy niż np. we Francji czy Turcji, jednak sytuacja w naszym kraju nadal wygląda zdecydowanie lepiej niż w Hiszpanii czy Włoszech. 
 
 Generalnie jednak, analiza ta pokazuje, w jak słabej sytuacji demograficznej znalazły się kraje europejskie – w żadnym z nich nie jest zagwarantowana zastępowalność pokoleń. Będzie to prawdopodobnie jeden z kluczowych problemów z jakimi będą borykały się europejskie rządy w nadchodzących dekadach.
+
+``` {r message=FALSE, warning=FALSE, results='hide'}
+tur = dane[dane$country == "TR", 5]
+mean(tur$values)
+
+pl = dane[dane$country == "PL", 5]
+mean(pl$values)
+
+fr = dane[dane$country == "FR", 5]
+mean(fr$values)
+
+ro = dane[dane$country == "RO", 5]
+mean(ro$values)
+
+es = dane[dane$country == "ES", 5]
+mean(es$values)
+
+it = dane[dane$country == "IT", 5]
+mean(it$values)
+```
