@@ -9,7 +9,7 @@ output:
 ## **1. Wprowadzenie**
 **Współczynnik dzietności** (ang. *fertility rate*) określa przeciętną liczbę dzieci, które urodziłaby kobieta w ciągu całego okresu rozrodczego (15-49 lat), przy założeniu, że w poszczególnych fazach tego okresu rodziłaby z intensywnością obserwowaną wśród kobiet w badanym roku. Przyjmuje się, iż współczynnik dzietności między 2,10 a 2,15 jest wartością zapewniającą prostą zastępowalność pokoleń (czyli utrzymanie liczby ludności populacji).
 
-Celem niniejszej analizy jest scharakteryzowanie współczynnika dzietności w 37 krajach Europy podzielonych na **jednostki NUTS 2**, dla których Eurostat zbiera dane w tej dziedzinie. Dane dotyczą roku 2018, a także trendów zmian od końca XX wieku. W pierwszym etapie przeprowadzono analizę dla wszystkich jednostek, a następnie w podziale na regiony kontynentu (Europę Północną, Zachodnią, Środkową Południową oraz Bałkany).
+Celem niniejszej analizy jest scharakteryzowanie współczynnika dzietności w 37 krajach Europy podzielonych na **jednostki NUTS 2**, dla których Eurostat zbiera dane w tej dziedzinie. Dane dotyczą roku 2018, a także trendów zmian od końca XX wieku. W pierwszym etapie przeprowadzono analizę dla wszystkich jednostek, a następnie w podziale na regiony kontynentu (Europę Północną, Zachodnią, Środkową, Południową oraz Bałkany).[Mapa](https://dl.dropboxusercontent.com/s/jval7cjcnwikmn0/Legenda.jpg?dl=0) obrazująca dokonany przez autorów podział Europy na regiony.
 
 ## **2. Dane**
 Analizę przeprowadzono w oparciu o dane dotyczące współczynnika dzietności w krajach europejskich dostępnych na stronie Eurostatu. Dane te dostarczają informacji o liczbie dzieci, które przeciętna kobieta rodzi w swoim życiu w podziale na jednostki NUTS2. [Link do danych](https://ec.europa.eu/eurostat/databrowser/view/demo_r_frate2/default/table?lang=en)
@@ -33,6 +33,7 @@ Analiza statystyczna danych została wykonana w środowisku R. Podczas analizy i
 - `dplyr` - pozwala na obliczanie statystyk, tworzenie nowych kolumn itp.
 - `stringr` - dodaje funkcje operujące na ciągach tekstowych
 - `tmap` - wizualizuje dane przestrzennie tworząc mapy
+- `kableExtra` - tworzy podsumowujące tabele statystyczne
 
 ## **4. Charakterystyka wspólczynnika dzietnosci w krajach europejskich**
 
@@ -59,9 +60,9 @@ quantile(dane$values)[c(2, 4)]
 nrow(dane[dane$values > 2.1, ])
 ```
 
-Według danych pozyskanych z Eurostatu, współczynnik dzietności w krajach Europy (dla których Eurostat zbiera dane) mieścił się w przedziale 1,02 - 3,57 dziecka na kobietę. **Średnia i mediana** dla tego współczynnika są prawie identyczne - obydwie wynoszą 1,6 przy odchyleniu standardowym równym 0.28 (co oznacza że 68% jednostek NUTS2 ma współczynnik dzietności w przedziale 1,32 - 1,88). Najwięcej urodzeń na jedną kobietę **(3,57)** przypada w regionie Sanliurfa w Turcji, natomiast najmniej **(1,02)** - na Sardynii we Włoszech. Po obliczeniu wartości kwartylnych okazało się, że w 75% regionów współczynnik dzietności wynosi ponad 1,44, a 1/4 regionów przekracza wartość 1,72. Tylko w 7 regionach współczynnik dzietności przekracza wartość zapewniającą zastępowalność pokoleń, czyli 2,1.
+Według danych pozyskanych z Eurostatu, współczynnik dzietności w krajach Europy (dla których Eurostat zbiera dane) mieścił się w przedziale 1,02 - 3,57 dziecka na kobietę. **Średnia i mediana** dla tego współczynnika są prawie identyczne - obydwie wynoszą 1,6 przy odchyleniu standardowym równym 0.28 (co oznacza że 68% jednostek NUTS 2 ma współczynnik dzietności w przedziale 1,32 - 1,88). Najwięcej urodzeń na jedną kobietę **(3,57)** przypada w regionie Sanliurfa w Turcji, natomiast najmniej **(1,02)** - na Sardynii we Włoszech. Po obliczeniu wartości kwartylnych okazało się, że w 75% regionów współczynnik dzietności wynosi ponad 1,44, a 1/4 regionów przekracza wartość 1,72. Tylko w 7 regionach współczynnik dzietności przekracza wartość zapewniającą zastępowalność pokoleń, czyli 2,1.
 
-Rozkład przestrzenny tych wartości zobrazowano na poniższej mapie (ryc. 1). Przedstawia ona jednostki NUTS2 wraz z wartościami współczynnika dzietności.
+Rozkład przestrzenny tych wartości zobrazowano na poniższej mapie (ryc. 1). Przedstawia ona jednostki NUTS 2 wraz z wartościami współczynnika dzietności.Pod legendą dodano także histogram dla omawianych danych.
 
 ```{r message=FALSE, warning=FALSE}
 library(tmap)
@@ -93,7 +94,7 @@ map2
 *Ryc. 1 Mapa rozkładu przestrzennego współczynnika dzietności w Europie wg jednostek NUTS 2 (2018)*
 
 ## **5. Charakterystyka współczynnika dzietności w podziale na regiony Europy**
-W niniejszym rozdziale wartości współczynnika dzietności zostały przeanalizowane w podziale na pięć regionów Europy: Europę Południową, Europę Północną, Europę Zachodnią, Europę Środkową oraz Bałkany. Poniższa tabela (tab. 1) przedstawia zestawienie podstawowych statystyk opisowych (średniej, mediany, zakresu), a także maksimum, minimum oraz różnicę pomiędzy trzecim i pierwszym kwartylem (ang. IQR -  *interquartile range*) dla tych poszczególnych regionów. Średnia oraz mediana posiadają bardzo zbliżone wartości dla wszystkich regionów, z wyjątkiem Europy Południowej, w której skład zalicza się Turcja. Wysoki współczynnik dzietności Turcji powoduje znacznie większy zakres wartości, wpływając na wszystkie pozostałe statystyki – z tego powodu zakres dla Europy Południowej wynosi aż 2,55. Statystyki pozostałych regionów Europy nie wyróżniają się pod żadnym szczególnym względem – są naturalnie zróżnicowane.
+W niniejszym rozdziale wartości współczynnika dzietności zostały przeanalizowane w podziale na pięć regionów Europy: Europę Południową, Europę Północną, Europę Zachodnią, Europę Środkową oraz Bałkany. Poniższa tabela (tab. 1) przedstawia zestawienie podstawowych statystyk opisowych (średniej, mediany, zakresu), a także maksimum, minimum oraz różnicę pomiędzy trzecim i pierwszym kwartylem (ang. IQR -  *interquartile range*) dla tych poszczególnych regionów. Średnia oraz mediana posiadają bardzo zbliżone wartości dla wszystkich regionów, z wyjątkiem Europy Południowej, do której zaliczono również Turcję. Wysoki współczynnik dzietności Turcji powoduje znacznie większy zakres wartości w Europie Południowej, wpływając na wszystkie pozostałe statystyki – z tego powodu zakres dla Europy Południowej wynosi aż 2,55. Statystyki pozostałych regionów Europy nie wyróżniają się pod żadnym szczególnym względem – są naturalnie zróżnicowane.
 
 ```{r message=FALSE, warning=FALSE}
 library(kableExtra)
