@@ -1,30 +1,33 @@
 ---
-title: "raport_stat"
-author: "Tomek"
+title: "**Tytul**"
+author: "**Tomasz Matuszek, Adrian Nowacki, Mateusz Rydzik**"
 date: "10 12 2020"
-output: html_document
+output: 
+  html_document:
+    code_folding: hide
 ---
 
-```{r setup, include=FALSE}
+```{r setup}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+## **1. Wprowadzenie**
+tekst
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+## **2. Dane**
+dane
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+## **3. Metody**
+pakiety
 
-```{r cars}
-summary(cars)
-```
+## **4. Charakterystyka wspólczynnika dzietnosci w krajach europejskich**
+opis ogólny
 
-## Including Plots
+## **5. Charakterystyka wspólczynnika dzietnosci w podziale na regiony Europy**
+opis
 
-You can also embed plots, for example:
+## **6. Wspólczynnik dzietnosci we Francji**
+Mateusz napisz
 
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+## **7. Podsumowanie**
+blabla
