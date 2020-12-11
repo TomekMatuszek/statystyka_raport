@@ -7,7 +7,9 @@ output:
 ---
 
 ## **1. Wprowadzenie**
-tekst
+**Współczynnik dzietności** (ang. *fertility rate*) określa przeciętną liczbę dzieci, które urodziłaby kobieta w ciągu całego okresu rozrodczego (15-49 lat), przy założeniu, że w poszczególnych fazach tego okresu rodziłaby z intensywnością obserwowaną wśród kobiet w badanym roku. Przyjmuje się, iż współczynnik dzietności **między 2,10 a 2,15** jest wartością zapewniającą prostą zastępowalność pokoleń (czyli utrzymanie liczby ludności populacji).
+
+Celem niniejszej analizy jest scharakteryzowanie współczynnika dzietności w 37 krajach Europy podzielonych na **jednostki NUTS 2**, dla których Eurostat zbiera dane w tej dziedzinie. Dane dotyczą roku 2018, a także trendów zmian od końca XX wieku. W pierwszym etapie przeprowadzono analizę dla wszystkich jednostek, a następnie w podziale na regiony kontynentu (Europę Północną, Zachodnią, Południową oraz Bałkany).
 
 ## **2. Dane**
 Analizę przeprowadzono w oparciu o dane dotyczące współczynnika dzietności w krajach europejskich dostępnych na stronie Eurostatu. Dane te dostarczają informacji o liczbie dzieci, które przeciętna kobieta rodzi w swoim życiu w podziale na jednostki NUTS2. [Link do danych](https://ec.europa.eu/eurostat/databrowser/view/demo_r_frate2/default/table?lang=en)
