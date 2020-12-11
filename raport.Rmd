@@ -61,7 +61,7 @@ nrow(dane[dane$values > 2.1, ])
 
 Według danych pozyskanych z Eurostatu, współczynnik dzietności w krajach Europy (dla których Eurostat zbiera dane) mieścił się w przedziale 1,02 - 3,57 dziecka na kobietę. **Średnia i mediana** dla tego współczynnika są prawie identyczne - obydwie wynoszą 1,6 przy odchyleniu standardowym równym 0.28 (co oznacza że 68% jednostek NUTS2 ma współczynnik dzietności w przedziale 1,32 - 1,88). Najwięcej urodzeń na jedną kobietę **(3,57)** przypada w regionie Sanliurfa w Turcji, natomiast najmniej **(1,02)** - na Sardynii we Włoszech. Po obliczeniu wartości kwartylnych okazało się, że w 75% regionów współczynnik dzietności wynosi ponad 1,44, a 1/4 regionów przekracza wartość 1,72. Tylko w 7 regionach współczynnik dzietności przekracza wartość zapewniającą zastępowalność pokoleń, czyli 2,1.
 
-Rozkład przestrzenny tych wartości zobrazowano na poniższej mapie. Przedstawia ona jednostki NUTS2 wraz z wartościami współczynnika dzietności.
+Rozkład przestrzenny tych wartości zobrazowano na poniższej mapie (ryc. 1). Przedstawia ona jednostki NUTS2 wraz z wartościami współczynnika dzietności.
 
 ```{r message=FALSE, warning=FALSE}
 library(tmap)
@@ -165,10 +165,6 @@ library(stringr)
 grupy = group_by(dane_regiony, region)
 grupy_summary =  summarize(grupy, srednia = mean(values))
 
-# obciecie wystających wartosci dla lepszej widocznosci histogramow
-dane_regiony2 = arrange(dane_regiony, desc(values))
-dane_regiony2 = dane_regiony2[-c(1:7), ]
-
 ggplot(dane_regiony2, aes(x=values, fill = region)) +
   scale_fill_manual(values = c("tomato", "coral4", "chartreuse4", "dodgerblue3", "violetred3")) +
   geom_histogram(data=subset(dane_regiony2, region == 'Europa Południowa'), alpha = 0.4, binwidth = 0.05) +
@@ -188,6 +184,8 @@ ggplot(dane_regiony2, aes(x=values, fill = region)) +
 ```
 
 *Ryc. 3 Nałożone na siebie histogramy obrazujące rozkład wartości współczynnika dzietności dla poszczególnych regionów Europy.*
+
+Analizując powyższe wykresy (ryc. 2 i ryc. 3) można zauważyć, że większość regionów Europy ma w miarę równomierny rozkład wartości współczynnika dzietności, a także medianę zbliżoną do mediany całego kontynentu. Jedynym regionem, którego mediana znacząco się różni od mediany europejskiej jest Europa Południowa. Hiszpania, Włochy i Grecja są bowiem krajami, w których żadnym regionie współczynnik dzietności nie przekracza 1,4. Europa Południowa ma też największy rozrzut wartości ze wszystkich regionów z tego powodu, że została do niej zaliczona także Turcja która w przeciwieństwie do innych krajów śródziemnomorskich charakteryzuje się stosunkowo wysoką dzietnością (szczególnie w regionach południowo-wschodnich). Z histogramu można też wywnioskować, że kraje Europy Zachodniej nie mają aż takich problemów z dzietnością jak ich południowi sąsiedzi. Generalnie jednak, rozkład wartości na histogramie można określić jako zbliżony do normalnego.
 
 ``` {r message=FALSE, warning=FALSE}
 library(eurostat)
