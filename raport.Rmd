@@ -1,5 +1,5 @@
 ---
-title: "**Rozkład współczynnika dzietności w Europie w 2018 roku**"
+title: "**Rozkład współczynnika dzietności w Europie**"
 author: "**Tomasz Matuszek, Adrian Nowacki, Mateusz Rydzik**"
 output: 
   html_document:
@@ -93,24 +93,22 @@ map2
 opis
 
 ```{r message=FALSE, warning=FALSE}
-library(eurostat)
 library(kableExtra)
 library(dplyr)
 library(stringr)
 
-fer = search_eurostat(pattern = "fertility rate", type = "table")
-
-dane2018 = get_eurostat("tgs00100", type = "code", time_format = "date", filters = list(time = 2018))
-
-dane2018 = mutate(dane2018, country = str_sub(geo, 1, 2))
+dane = mutate(dane, country = str_sub(geo, 1, 2))
+dane = filter(dane, geo != "FRY5", geo != "FRY3", geo != "FRY4", 
+                  geo != "FRY2", geo != "FRY1", geo != "ES7", geo != "ES70", 
+                  geo != "PT2", geo != "PT20", geo != "PT3", geo != "PT30")
 
 pattern = c("BG" = "Bałkany", "EL" = "Europa Południowa",  "HR" = "Bałkany", "SI" = "Bałkany", "RS" = "Bałkany", "ME" = "Bałkany", "MK" = "Bałkany", "IT" = "Europa Południowa", "AL" = "Bałkany", "MT" = "Europa Południowa", "DK" = "Europa Północna", "NO" = "Europa Północna", "FI" = "Europa Północna", "SE" = "Europa Północna", "IS" = "Europa Północna", "IE" = "Europa Zachodnia", "BE" = "Europa Zachodnia", "UK" = "Europa Zachodnia", "FR" = "Europa Zachodnia", "LU" = "Europa Zachodnia", "NL" = "Europa Zachodnia", "ES" = "Europa Południowa", "CY" = "Europa Południowa", "PT" = "Europa Południowa","CZ" = "Europa Środkowa", "DE" = "Europa Środkowa", "PL" = "Europa Środkowa", "AT" = "Europa Środkowa", "HU" = "Europa Środkowa", "SK" = "Europa Środkowa", "LI" = "Europa Środkowa", "CH" = "Europa Zachodnia", "SI" = "Europa Środkowa", "EE" = "Europa Północna", "LT" = "Europa Północna", "LV" = "Europa Północna", "RO" = "Bałkany", "TR" = "Europa Południowa")
-dane2018 = mutate(dane2018, region = str_replace_all(country, pattern))
+dane = mutate(dane, region = str_replace_all(country, pattern))
 
 #potrzebne dane z srednia_dziet_08-18(dane2018)
 
 #statystyki opisowe dla poszczególnych regionów
-grupy = group_by(dane2018, region)
+grupy = group_by(dane, region)
 statystyka_dziet <- summarise(grupy, 
                               średnia = mean(values), 
                               mediana = median(values),
