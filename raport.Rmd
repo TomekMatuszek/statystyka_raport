@@ -290,6 +290,8 @@ ggplot(regiony, aes(rok, srednia, group = region, color = region)) +
 
 *Ryc. 4 Zmiany współczynnika dzietności w regionach Europy w latach 2010 – 2018.*
 
+OPISSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+
 ## **6. Współczynnik dzietności we Francji**
 Francja jest jednym z przodowników dzietności w krajach europejskich.  Wraz ze Szwecją, Rumunią, Irlandią i Danią tworzy grupę europejskich krajów o wysokich wskaźnikach dzietności. Analiza Francji w wielu obszarach pomoże uzyskać podstawowe czynniki, wpływające na wielkość wskaźnika dzietności.
 
@@ -302,10 +304,10 @@ library(ggplot2)
 fr = select(fr, Data = `time`, Wartość = `values`)
 fr$Data = str_replace(fr$Data, "-01-01", "")
 
-ggplot(fr, aes(Data, Wartość, group = 1)) + geom_line(color = 'dodgerblue3', size = 1.5) +
+ggplot(fr, aes(Data, Wartość, group = 1)) + geom_line(color = 'dodgerblue3', size = 1.8) +
   ylim(1.5, 2.3) + labs(y = "Współczynnik dzietności") +
-  theme(plot.background = element_rect(fill = "gray25"), 
-        panel.background = element_rect(fill = "gray20"),
+  theme(plot.background = element_rect(fill = "gray20"), 
+        panel.background = element_rect(fill = "gray25"),
         axis.title.x = element_blank(),
         axis.title = element_text(size = 15, color = "#eeeeee"), 
         axis.text = element_text(size = 12,  color = "#eeeeee"))
