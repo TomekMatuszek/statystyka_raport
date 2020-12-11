@@ -1,18 +1,20 @@
 ---
-title: "**Rozkład współczynnika dzietności w Europie**"
-author: "**Tomasz Matuszek, Adrian Nowacki, Mateusz Rydzik**"
-output: 
+title: '**Rozkład współczynnika dzietności w Europie**'
+author: '**Tomasz Matuszek, Adrian Nowacki, Mateusz Rydzik**'
+output:
   html_document:
     code_folding: hide
+  word_document: default
+  pdf_document: default
 ---
 
 ## **1. Wprowadzenie**
 **Współczynnik dzietności** (ang. *fertility rate*) określa przeciętną liczbę dzieci, którą urodziłaby kobieta w ciągu całego okresu rozrodczego (15-49 lat), przy założeniu, że w poszczególnych fazach tego okresu rodziłaby z intensywnością obserwowaną wśród kobiet w badanym roku. Przyjmuje się, iż współczynnik dzietności między 2,10 a 2,15 jest wartością zapewniającą prostą zastępowalność pokoleń (czyli utrzymanie liczby ludności populacji).
 
-Celem niniejszej analizy jest scharakteryzowanie współczynnika dzietności w 37 krajach Europy podzielonych na **jednostki NUTS 2**, dla których Eurostat zbiera dane w tej dziedzinie. Dane dotyczą roku 2018, a także trendów zmian od końca XX wieku. W pierwszym etapie przeprowadzono analizę dla wszystkich jednostek, a następnie w podziale na regiony kontynentu (Europę Północną, Zachodnią, Środkową, Południową oraz Bałkany). [Mapa](https://dl.dropboxusercontent.com/s/jval7cjcnwikmn0/Legenda.jpg?dl=0) obrazująca dokonany przez autorów podział Europy na regiony.
+Celem niniejszej analizy jest scharakteryzowanie współczynnika dzietności w 37 krajach Europy podzielonych na **jednostki NUTS 2**, dla których Eurostat zbiera dane w tej dziedzinie. Dane dotyczą roku 2018, a także trendów zmian od końca XX wieku. W pierwszym etapie przeprowadzono analizę dla wszystkich jednostek, a następnie w podziale na regiony kontynentu (Europę Północną, Zachodnią, Środkową, Południową oraz Bałkany). Mapę obrazującą dokonany przez autorów podział Europy na regiony udostępniono <a href="https://dl.dropboxusercontent.com/s/jval7cjcnwikmn0/Legenda.jpg?dl=0" target="_blank">tutaj</a>.
 
 ## **2. Dane**
-Analizę przeprowadzono w oparciu o dane dotyczące współczynnika dzietności w krajach europejskich dostępnych na stronie Eurostatu. Dane te dostarczają informacji o liczbie dzieci, które przeciętna kobieta rodzi w swoim życiu w podziale na jednostki NUTS2. [Link do danych](https://ec.europa.eu/eurostat/databrowser/view/demo_r_frate2/default/table?lang=en)
+Analizę przeprowadzono w oparciu o dane dotyczące współczynnika dzietności w krajach europejskich dostępnych na stronie Eurostatu. Dane te dostarczają informacji o liczbie dzieci, które przeciętna kobieta rodzi w swoim życiu w podziale na jednostki NUTS2. <a href="https://ec.europa.eu/eurostat/databrowser/view/demo_r_frate2/default/table?lang=en" target="_blank">Link do danych</a>
 
 ```{r}
 library(eurostat)
@@ -33,9 +35,9 @@ Analiza statystyczna danych została wykonana w środowisku R. Podczas analizy i
 - `dplyr` - pozwala na obliczanie statystyk, tworzenie nowych kolumn itp.
 - `stringr` - dodaje funkcje operujące na ciągach tekstowych
 - `tmap` - wizualizuje dane przestrzennie tworząc mapy
-- `kableExtra` - tworzy podsumowujące tabele statystyczne
+- `kableExtra` - generuje złożone tabele z możliwością ich stylizacji
 
-## **4. Charakterystyka wspólczynnika dzietnosci w krajach europejskich**
+## **4. Charakterystyka współczynnika dzietności w krajach europejskich**
 
 ```{r results='hide'}
 # minimalna i maksymalna dzietnosc
@@ -114,7 +116,7 @@ dane = mutate(dane, region = str_replace_all(country, pattern))
 #statystyki opisowe dla poszczególnych regionów
 grupy = group_by(dane, region)
 statystyka_dziet <- summarise(grupy, 
-                              średnia = mean(values), 
+                              srednia = mean(values), 
                               mediana = median(values),
                               min = min(values), 
                               max = max(values),
