@@ -16,7 +16,7 @@ dane2016 = mutate(dane2016, country = str_sub(geo, 1, 2))
 dane2018 = mutate(dane2018, country = str_sub(geo, 1, 2))
 
 pattern = c("BG" = "Bałkany",
-            "EL" = "Bałkany",  "HR" = "Bałkany", "SI" = "Bałkany", "RS" = "Bałkany", 
+            "EL" = "Europa Południowa",  "HR" = "Bałkany", "SI" = "Bałkany", "RS" = "Bałkany", 
             "ME" = "Bałkany", "MK" = "Bałkany", 
             "IT" = "Europa Południowa", "AL" = "Bałkany", "MT" = "Europa Południowa",
             "DK" = "Europa Północna", "NO" = "Europa Północna", "FI" = "Europa Północna",
@@ -97,9 +97,9 @@ regiony = rbind(europa_pn, balkany, europa_pd, europa_zach, europa_sr)
 
 
 ggplot(regiony, aes(rok, srednia, group = region, color = region)) + 
-  geom_line(size = 1.8) + 
-  theme(
-    plot.background = element_rect(fill = "#252525"), 
+  geom_line(size = 1.8) +
+  labs(x = element_blank(), y = "Współczynnik dzietności", col = "Region") +
+  theme(plot.background = element_rect(fill = "#252525"), 
     panel.background = element_rect(fill = "#555555"), 
     axis.title = element_text(size = 15,
                               color = "#eeeeee"), 
@@ -111,6 +111,7 @@ ggplot(regiony, aes(rok, srednia, group = region, color = region)) +
                                      fill = "#777777"),  
     legend.title = element_text(size = 13),
     legend.text = element_text(size = 12),
+    legend.key = element_rect(fill = "#777777"),
     axis.text = element_text(size = 12, 
                              color = "#eeeeee"),
     axis.title.x = element_text(vjust = 0))
