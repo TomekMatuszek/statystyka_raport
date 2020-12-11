@@ -291,7 +291,7 @@ ggplot(regiony, aes(rok, srednia, group = region, color = region)) +
 *Ryc. 4 Zmiany współczynnika dzietności w regionach Europy w latach 2010 – 2018.*
 
 ## **6. Współczynnik dzietności we Francji**
-Mateusz napisz
+Francja jest jednym z przodowników dzietności w krajach europejskich.  Wraz ze Szwecją, Rumunią, Irlandią i Danią tworzy grupę europejskich krajów o wysokich wskaźnikach dzietności. Analiza Francji w wielu obszarach pomoże uzyskać podstawowe czynniki, wpływające na wielkość wskaźnika dzietności.
 
 ``` {r message=FALSE, warning=FALSE}
 library(eurostat)
@@ -311,6 +311,18 @@ ggplot(fr, aes(Data, Wartość, group = 1)) + geom_line(color = 'dodgerblue3', s
         axis.text = element_text(size = 12,  color = "#eeeeee"))
 
 ```
+
+*Ryc. 5 Zmiany współczynnika dzietności we Francji w latach 1990 – 2018.*
+
+ Od lat 20 XX wieku wartość współczynnika dzietności kraju nie spadła poniżej 1,6. Po powojennym wyżu demograficznym, wielkość wskaźnika malała do roku 1995, gdzie osiągneła wartość 1,7 (ryc. 5). Od tego momentu, współczynnik dzietności Francji wzrastał do 2010. Zanotowano wtedy wartość 2,03. Współczynnik dzietności przekroczył wartość 2,0 pierwszy raz od ponad 30 lat. 
+ 
+Znaczący wzrost wskaźnika dzietności we Francji przypisywany jest polityce społecznej i gospodarczej kraju. Nacisk rządu francuskiego na politykę pro-rodzinną pozwolił na rozszerzenie zakresu świadczeń rodzinnych.  Udostępniono rozszerzone zasiłki oraz dodatki do czynszów.  Wprowadzono urlop wychowaczy, ujednolicony dla obydwu rodziców. Rozwinięto także struktury opieki nad dziećmi, m.in. zwiększenie wydatków na utrzymywanie żłobków czy przedszkoli.  Koncentracja rządu francuskiego na polityce ‘pro-family’ uzasadniana jest strukturą ekonomiczną państwa. Bilans handlowy Francji w kilkunastu ostatnich latach osiąga wartości ujemne. Przewaga importu nad eksportem wymaga zwiększenia rynku konsumpcyjnego, co bezpośrednio oddziaływuje na konieczność zachowania współczynnika dzietności na wysokim poziomie.   
+
+Polityka państwa pokrywa się z rozwiniętą kulturą rodziny. Duża część Francuzów utożsamia szczęście i spełnienie z udanym życiem rodzinnym i społecznym. Teza ta jest argumentowana wysokim wskaźnikiem dzietności we Francji w 2010 roku, co sugeruje poczęcie większości narodzonych wtedy dzieci w 2009 roku, podczas występowania kryzysu ekonomicznego.
+
+Warty zaznaczenia jest także duży udział w populacji Francji osób z regionów Afryki Północnej. Ludność ta, w większości wyznania muzułmańskiego, charakteryzuje się wysokim wskaźnikiem dzietności, wpływając na wzrost wskaźnika narodowego.
+
+Mimo tego, od 2010 odnotowywany jest spadek współczynnika dzietności we Francji. Dodatkowo, ogłoszone odejeście rządu od rozbudowanej polityki pro-rodzinnej prognozuje utrzymanie regresji wskaźnika dzietności we Francji na najbliższe lata.
 
 ## **7. Podsumowanie**
 Przeprowadzona analiza współczynnika dzietności w Europie ukazała, że istnieją pewne regionalne różnice w jego rozkładzie przestrzennym. Państwa śródziemnomorskie okazały się mieć dramatycznie niską zastępowalność pokoleń oraz silnie kontrastować z innym państwem śródziemnomorskim – Turcją. W innych częściach kontynentu zróżnicowanie dzietności jest mniejsze, a także współczynnik ten przyjmuje generalnie wyższe wartości. Najlepiej sytuacja wygląda we Francji, Szwecji, Irlandii oraz wschodniej części Rumunii. Polska na tle Europy jawi się jako kraj o średniej wysokości współczynnika dzietności – jest on niższy niż np. we Francji czy Turcji, jednak sytuacja w naszym kraju nadal wygląda zdecydowanie lepiej niż w Hiszpanii czy Włoszech. 
