@@ -15,3 +15,6 @@ dane[which.min(dane$values),]
 
 # kwantyle
 quantile(dane$values)[c(2, 4)]
+
+#zastepowalnosc pokolen
+nrow(dane[dane$values > 2.1, ])
