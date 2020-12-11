@@ -141,6 +141,7 @@ dane_regiony = mutate(dane, region = str_replace_all(country, c("BG" = "Bałkany
 
 ggplot(dane_regiony, aes(x = region, y = values, col = region)) +
   coord_flip() + scale_color_manual(values = c("tomato", "coral4", "chartreuse4", "dodgerblue3", "violetred3")) +
+  ylim(0.25, 3.75) +
   #geom_boxplot(col = "black") +
   labs(y = "Wspolczynnik dzietnosci", x = element_blank(), col = "Region") +
   theme(legend.position = "none", 
@@ -150,7 +151,7 @@ ggplot(dane_regiony, aes(x = region, y = values, col = region)) +
         axis.title.x = element_text(color = "#eeeeee")) +
   geom_hline(yintercept = median(dane$values), color = "darkred", size = 1.5) +
   geom_jitter(size = 2, alpha = 0.6, width = 0.4) +
-  stat_summary(fun = median, geom = "point", size = 8)
+  stat_summary(fun = median, geom = "point", size = 6)
 ```
 
 ``` {r message=FALSE, warning=FALSE}
