@@ -123,12 +123,11 @@ statystyka_dziet <- summarise(grupy,
 colnames(statystyka_dziet) <- c("Region", "Średnia", "Mediana", "Minimum",
                                          "Maksimum", "IQR", "Zakres")
 
-tabela = kbl(statystyka_dziet, align = 'c', digits = 2, caption = '<span style = "color: #222222; font-size:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Statystyki opisowe dla dzietnosci 
-             w 2018 roku w podziale na regiony</SPAN>')
+tabela = kbl(statystyka_dziet, align = 'c', digits = 2)
 kable_material_dark(tabela, html_font = "Arial", full_width = T)
 ```
 
-*Tab. 1 Statystyki opisowe dla dzietnosci w 2018 roku w podziale na regiony*
+*Tab. 1 Statystyki opisowe dla dzietności w 2018 roku w podziale na regiony*
 
 ```{r message=FALSE, warning=FALSE}
 library(ggplot2)
@@ -274,7 +273,7 @@ balkany= mutate(balkany, region = "Balkany")
 regiony = rbind(europa_pn, balkany, europa_pd, europa_zach, europa_sr)
 
 ggplot(regiony, aes(rok, srednia, group = region, color = region)) + 
-  geom_line(size = 1.8) +
+  geom_line(size = 1.8) + scale_color_manual(values = c("tomato", "coral4", "chartreuse4", "dodgerblue3", "violetred3")) +
   labs(x = element_blank(), y = "Współczynnik dzietności", col = "Region") +
   theme(plot.background = element_rect(fill = "gray20"), 
     panel.background = element_rect(fill = "gray25"), 
