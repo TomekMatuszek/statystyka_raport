@@ -122,7 +122,7 @@ statystyka_dziet <- summarise(grupy,
 colnames(statystyka_dziet) <- c("Region", "Średnia", "Mediana", "Minimum",
                                          "Maksimum", "IQR", "Zakres")
 
-tabela = kbl(statystyka_dziet, align = 'c', digits = 2, caption = '<span style = "color: #222222; font-size:130%">          Statystyki opisowe dla dzietnosci 
+tabela = kbl(statystyka_dziet, align = 'c', digits = 2, caption = '<span style = "color: #222222; font-size:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Statystyki opisowe dla dzietnosci 
              w 2018 roku w podziale na regiony</SPAN>')
 kable_material_dark(tabela, html_font = "Arial", full_width = T)
 ```
