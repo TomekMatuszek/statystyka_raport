@@ -93,7 +93,7 @@ map2
 *Ryc. 1 Mapa rozkładu przestrzennego współczynnika dzietności w Europie wg jednostek NUTS 2 (2018)*
 
 ## **5. Charakterystyka współczynnika dzietności w podziale na regiony Europy**
-W niniejszym rozdziale wartości współczynnika dzietności zostały przeanalizowane w podziale na pięć regionów Europy: Europę Południową, Europę Północną, Europę Zachodnią, Europę Środkową oraz Bałkany. Poniższa tabela przedstawia zestawienie podstawowych statystyk opisowych (średniej, mediany, zakresu) dla tych poszczególnych regionów.
+W niniejszym rozdziale wartości współczynnika dzietności zostały przeanalizowane w podziale na pięć regionów Europy: Europę Południową, Europę Północną, Europę Zachodnią, Europę Środkową oraz Bałkany. Poniższa tabela (tab. 1) przedstawia zestawienie podstawowych statystyk opisowych (średniej, mediany, zakresu), a także maksimum, minimum oraz różnicę pomiędzy trzecim i pierwszym kwartylem (ang. IQR -  *interquartile range*) dla tych poszczególnych regionów. Średnia oraz mediana posiadają bardzo zbliżone wartości dla wszystkich regionów, z wyjątkiem Europy Południowej, w której skład zalicza się Turcja. Wysoki współczynnik dzietności Turcji powoduje znacznie większy zakres wartości, wpływając na wszystkie pozostałe statystyki – z tego powodu zakres dla Europy Południowej wynosi aż 2,55. Statystyki pozostałych regionów Europy nie wyróżniają się pod żadnym szczególnym względem – są naturalnie zróżnicowane.
 
 ```{r message=FALSE, warning=FALSE}
 library(kableExtra)
@@ -126,6 +126,8 @@ tabela = kbl(statystyka_dziet, align = 'c', digits = 2, caption = '<span style =
              w 2018 roku w podziale na regiony</SPAN>')
 kable_material_dark(tabela, html_font = "Arial", full_width = T)
 ```
+
+*Tab. 1 Statystyki opisowe dla dzietnosci w 2018 roku w podziale na regiony*
 
 ```{r message=FALSE, warning=FALSE}
 library(ggplot2)
