@@ -33,7 +33,30 @@ Analiza statystyczna danych została wykonana w środowisku R. Podczas analizy i
 - `tmap` - wizualizuje dane przestrzennie tworząc mapy
 
 ## **4. Charakterystyka wspólczynnika dzietnosci w krajach europejskich**
-opis ogólny
+
+```{r results='hide'}
+# minimalna i maksymalna dzietnosc
+min(dane$values)
+max(dane$values)
+
+# srednia i miediana
+mean(dane$values)
+median(dane$values)
+
+# odchylenie standardowe
+sd(dane$values)
+
+# NUTSy z najwyzsza i najnizsza dzietnoscia
+dane[which.max(dane$values),]
+dane[which.min(dane$values),]
+
+# kwantyle
+quantile(dane$values)[c(2, 4)]
+```
+
+Według danych pozyskanych z Eurostatu, współczynnik dzietności w krajach Europy (dla których Eurostat zbiera dane) mieścił się w przedziale 1,02 - 3,57 dziecka na kobietę. **Średnia i mediana** dla tego współczynnika są prawie identyczne - obydwie wynoszą 1,6 przy odchyleniu standardowym równym 0.28 (co oznacza że 68% jednostek NUTS2 ma współczynnik dzietności w przedziale 1,32 - 1,88). Najwięcej urodzeń na jedną kobietę **(3,57)** przypada w regionie Sanliurfa w Turcji, natomiast najmniej **(1,02)** - na Sardynii we Włoszech. Po obliczeniu wartości kwartylnych okazało się, że w 75% regionów współczynnik dzietności wynosi ponad 1,44, a 1/4 regionów przekracza wartość 1,72. 
+
+Rozkład przestrzenny tych wartości zobrazowano na poniższej mapie. Przedstawia ona jednostki NUTS2 wraz z wartościami współczynnika dzietności.
 
 ```{r message=FALSE, warning=FALSE}
 library(tmap)
@@ -78,20 +101,7 @@ dane2018 = get_eurostat("tgs00100", type = "code", time_format = "date", filters
 
 dane2018 = mutate(dane2018, country = str_sub(geo, 1, 2))
 
-pattern = c("BG" = "Bałkany",
-            "EL" = "Europa Południowa",  "HR" = "Bałkany", "SI" = "Bałkany", "RS" = "Bałkany", 
-            "ME" = "Bałkany", "MK" = "Bałkany", 
-            "IT" = "Europa Południowa", "AL" = "Bałkany", "MT" = "Europa Południowa",
-            "DK" = "Europa Północna", "NO" = "Europa Północna", "FI" = "Europa Północna",
-            "SE" = "Europa Północna", "IS" = "Europa Północna", "IE" = "Europa Zachodnia",
-            "BE" = "Europa Zachodnia", "UK" = "Europa Zachodnia", "FR" = "Europa Zachodnia",
-            "LU" = "Europa Zachodnia", "NL" = "Europa Zachodnia", "ES" = "Europa Południowa", 
-            "CY" = "Europa Południowa", "PT" = "Europa Południowa","CZ" = "Europa Środkowa", 
-            "DE" = "Europa Środkowa", "PL" = "Europa Środkowa", "AT" = "Europa Środkowa",
-            "HU" = "Europa Środkowa", "SK" = "Europa Środkowa", "LI" = "Europa Środkowa",
-            "CH" = "Europa Zachodnia", "SI" = "Europa Środkowa", "EE" = "Europa Północna",
-            "LT" = "Europa Północna", "LV" = "Europa Północna", 
-            "RO" = "Bałkany", "TR" = "Europa Południowa")
+pattern = c("BG" = "Bałkany", "EL" = "Europa Południowa",  "HR" = "Bałkany", "SI" = "Bałkany", "RS" = "Bałkany", "ME" = "Bałkany", "MK" = "Bałkany", "IT" = "Europa Południowa", "AL" = "Bałkany", "MT" = "Europa Południowa", "DK" = "Europa Północna", "NO" = "Europa Północna", "FI" = "Europa Północna", "SE" = "Europa Północna", "IS" = "Europa Północna", "IE" = "Europa Zachodnia", "BE" = "Europa Zachodnia", "UK" = "Europa Zachodnia", "FR" = "Europa Zachodnia", "LU" = "Europa Zachodnia", "NL" = "Europa Zachodnia", "ES" = "Europa Południowa", "CY" = "Europa Południowa", "PT" = "Europa Południowa","CZ" = "Europa Środkowa", "DE" = "Europa Środkowa", "PL" = "Europa Środkowa", "AT" = "Europa Środkowa", "HU" = "Europa Środkowa", "SK" = "Europa Środkowa", "LI" = "Europa Środkowa", "CH" = "Europa Zachodnia", "SI" = "Europa Środkowa", "EE" = "Europa Północna", "LT" = "Europa Północna", "LV" = "Europa Północna", "RO" = "Bałkany", "TR" = "Europa Południowa")
 dane2018 = mutate(dane2018, region = str_replace_all(country, pattern))
 
 #potrzebne dane z srednia_dziet_08-18(dane2018)
@@ -105,17 +115,14 @@ statystyka_dziet <- summarise(grupy,
                               max = max(values),
                               IQR = IQR(values),
                               zakres = max(values)-min(values))
-colnames(statystyka_dziet) <- c("Region", "Średnia",
-                                         "Mediana", "Minimum",
+colnames(statystyka_dziet) <- c("Region", "Średnia", "Mediana", "Minimum",
                                          "Maksimum", "IQR", "Zakres")
-View(statystyka_dziet)
-
 
 tabela = kbl(statystyka_dziet, align = 'c', digits = 2, caption = '<span style = "color: #222222; font-size:130%">Statystyki opisowe dla dzietnosci 
              w 2018 roku w podziale na regiony</SPAN>')
 kable_material_dark(tabela, html_font = "Arial", full_width = T)
-
 ```
+
 ```{r message=FALSE, warning=FALSE}
 library(ggplot2)
 library(dplyr)
