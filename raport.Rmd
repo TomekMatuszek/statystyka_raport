@@ -165,13 +165,13 @@ library(stringr)
 grupy = group_by(dane_regiony, region)
 grupy_summary =  summarize(grupy, srednia = mean(values))
 
-ggplot(dane_regiony2, aes(x=values, fill = region)) +
+ggplot(dane_regiony, aes(x=values, fill = region)) +
   scale_fill_manual(values = c("tomato", "coral4", "chartreuse4", "dodgerblue3", "violetred3")) +
-  geom_histogram(data=subset(dane_regiony2, region == 'Europa Południowa'), alpha = 0.4, binwidth = 0.05) +
-  geom_histogram(data=subset(dane_regiony2, region == 'Europa Północna'), alpha = 0.4, binwidth = 0.05) +
-  geom_histogram(data=subset(dane_regiony2, region == 'Europa Zachodnia'), alpha = 0.4, binwidth = 0.05) +
-  geom_histogram(data=subset(dane_regiony2, region == 'Europa Środkowa'), alpha = 0.4, binwidth = 0.05) +
-  geom_histogram(data=subset(dane_regiony2, region == 'Bałkany'), alpha = 0.4, binwidth = 0.05) + 
+  geom_histogram(data=subset(dane_regiony, region == 'Europa Południowa'), alpha = 0.4, binwidth = 0.05) +
+  geom_histogram(data=subset(dane_regiony, region == 'Europa Północna'), alpha = 0.4, binwidth = 0.05) +
+  geom_histogram(data=subset(dane_regiony, region == 'Europa Zachodnia'), alpha = 0.4, binwidth = 0.05) +
+  geom_histogram(data=subset(dane_regiony, region == 'Europa Środkowa'), alpha = 0.4, binwidth = 0.05) +
+  geom_histogram(data=subset(dane_regiony, region == 'Bałkany'), alpha = 0.4, binwidth = 0.05) + 
   labs(x = "Współczynnik dzietności", y = "Liczba państw", fill = 'Region' ) + 
   theme(plot.background = element_rect(fill = "gray20"), 
     panel.background = element_rect(fill = "gray25"), 
