@@ -86,6 +86,7 @@ map2 = tm_shape(map_data, is.master = TRUE) +
              color.light = "gray40", size = 4)
 map2
 ```
+
 *Ryc. 1 Mapa rozkładu przestrzennego współczynnika dzietności w Europie wg jednostek NUTS 2 (2018)*
 
 ## **5. Charakterystyka wspólczynnika dzietnosci w podziale na regiony Europy**
