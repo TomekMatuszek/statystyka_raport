@@ -45,10 +45,14 @@ map_data_l = filter(map_data_l, geo != "FRY5", geo != "FRY3", geo != "FRY4",
                   geo != "PT2", geo != "PT20", geo != "PT3", geo != "PT30")
 
 map_legend = tm_shape(map_data_l, is.master = TRUE) +
-  tm_polygons(col = "region", n = 5,
-              border.col = "gray20",
-              legend.show = FALSE) +
-  tm_layout(frame.lwd = 1, bg.color = "gray20")
+  tm_polygons(col = "region", n = 5, title = "",
+              border.col = "gray20") +
+  tm_layout(frame.lwd = 1, bg.color = "gray20",
+            legend.position = c(0.75, 0.38),
+            legend.text.size = 1,
+            legend.title.size = 1.15,
+            legend.text.color = "#eeeeee",
+            legend.title.color = "#eeeeee")
 map_legend
 
 ggplot(dane_regiony, aes(x = values)) + 
