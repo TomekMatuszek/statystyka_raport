@@ -1,33 +1,247 @@
 ---
 title: "**Tytul**"
 author: "**Tomasz Matuszek, Adrian Nowacki, Mateusz Rydzik**"
-date: "10 12 2020"
 output: 
   html_document:
     code_folding: hide
 ---
 
-```{r setup}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
 ## **1. Wprowadzenie**
 tekst
 
 ## **2. Dane**
-dane
+Analizę przeprowadzono w oparciu o dane dotyczące współczynnika dzietności w krajach europejskich dostępnych na stronie Eurostatu. Dane te dostarczają informacji o liczbie dzieci, które przeciętna kobieta rodzi w swoim życiu w podziale na jednostki NUTS2. [Link do danych](https://ec.europa.eu/eurostat/databrowser/view/demo_r_frate2/default/table?lang=en)
+
+```{r}
+library(eurostat)
+
+fer = search_eurostat(pattern = "fertility rate", type = "table")
+dane = get_eurostat("tgs00100", type = "code", time_format = "date", filters = list(time = 2018))
+
+# wczytanie danych dla Francji z lat 1990-2018
+fr = get_eurostat("demo_r_frate2", type = "code", time_format = "date", 
+                  filters = list(time = c(1990, 1995, 2000, 2005, 2010, 2015, 2018), geo = 'FR', age = 'TOTAL'))
+```
 
 ## **3. Metody**
-pakiety
+Analiza statystyczna danych została wykonana w środowisku R. Podczas analizy i wizualizacji wyników wykorzystano funkcje zawarte w pakietach podstawowych oraz użyto następujące pakiety:
+
+- `eurostat` - umożliwia pobranie danych dostępnych w bazach Eurostatu
+- `ggplot2` - wizualizuje dane tworząc wykresy
+- `dplyr` - pozwala na obliczanie statystyk, tworzenie nowych kolumn itp.
+- `stringr` - dodaje funkcje operujące na ciągach tekstowych
+- `tmap` - wizualizuje dane przestrzennie tworząc mapy
 
 ## **4. Charakterystyka wspólczynnika dzietnosci w krajach europejskich**
 opis ogólny
 
+```{r message=FALSE, warning=FALSE}
+library(tmap)
+library(eurostat)
+library(dplyr)
+geodata = get_eurostat_geospatial(output_class = "sf", resolution = "60",
+                                   nuts_level = 2, year = 2016)
+map_data = inner_join(geodata, dane)
+map_data = filter(map_data, geo != "FRY5", geo != "FRY3", geo != "FRY4", 
+                  geo != "FRY2", geo != "FRY1", geo != "ES7", geo != "ES70", 
+                  geo != "PT2", geo != "PT20", geo != "PT3", geo != "PT30")
+
+map2 = tm_shape(map_data, is.master = TRUE) +
+  tm_polygons(col = "values", n = 7, title = "Fertility rate",
+              border.col = "gray20", palette = "viridis",
+              breaks = c(1, 1.2, 1.4, 1.6, 1.8, 2, Inf),
+              legend.hist = TRUE) +
+  tm_layout(frame.lwd = 1, bg.color = "gray25", attr.color = "black",
+            legend.position = c(0.79, 0.29),
+            legend.frame = TRUE, legend.text.size = 1,
+            legend.title.size = 1.15, legend.hist.width = 0.2,
+            legend.hist.height = 0.2, legend.bg.color = "gray40",
+            legend.hist.bg.color = "gray40") +
+  tm_compass(type = "rose", position = c("left", "bottom"),
+             color.light = "gray40", size = 4)
+map2
+```
+
 ## **5. Charakterystyka wspólczynnika dzietnosci w podziale na regiony Europy**
 opis
 
+```{r message=FALSE, warning=FALSE}
+library(ggplot2)
+library(dplyr)
+library(stringr)
+library(tmap)
+
+dane = mutate(dane, country = str_sub(geo, 1, 2))
+dane = filter(dane, geo != "FRY5", geo != "FRY3", geo != "FRY4", 
+                  geo != "FRY2", geo != "FRY1", geo != "ES7", geo != "ES70", 
+                  geo != "PT2", geo != "PT20", geo != "PT3", geo != "PT30")
+dane_regiony = mutate(dane, region = str_replace_all(country, c("BG" = "Bałkany", "EL" = "Europa Południowa", "HR" = "Bałkany", "SI" = "Bałkany", "RS" = "Bałkany", "ME" = "Bałkany", "MK" = "Bałkany", "IT" = "Europa Południowa", "AL" = "Bałkany", "MT" = "Europa Południowa", "DK" = "Europa Północna", "NO" = "Europa Północna", "FI" = "Europa Północna", "SE" = "Europa Północna", "IS" = "Europa Północna", "IE" = "Europa Zachodnia", "BE" = "Europa Zachodnia", "UK" = "Europa Zachodnia", "FR" = "Europa Zachodnia", "LU" = "Europa Zachodnia", "NL" = "Europa Zachodnia", "ES" = "Europa Południowa", "CY" = "Europa Południowa", "PT" = "Europa Południowa","CZ" = "Europa Środkowa", "DE" = "Europa Środkowa", "PL" = "Europa Środkowa", "AT" = "Europa Środkowa", "HU" = "Europa Środkowa", "SK" = "Europa Środkowa", "LI" = "Europa Środkowa", "CH" = "Europa Zachodnia", "SI" = "Europa Środkowa", "EE" = "Europa Północna", "LT" = "Europa Północna", "LV" = "Europa Północna", "RO" = "Bałkany", "TR" = "Europa Południowa")))
+
+ggplot(dane_regiony, aes(x = region, y = values, col = region)) +
+  coord_flip() + scale_color_manual(values = c("tomato", "coral4", "chartreuse4", "dodgerblue3", "violetred3")) +
+  #geom_boxplot(col = "black") +
+  labs(y = "Wspolczynnik dzietnosci", x = element_blank(), col = "Region") +
+  theme(legend.position = "none", 
+        plot.background = element_rect(fill = "gray20"), 
+        panel.background = element_rect(fill = "gray25"),
+        axis.text = element_text(size = 12, color = "#eeeeee"),
+        axis.title.x = element_text(color = "#eeeeee")) +
+  geom_hline(yintercept = median(dane$values), color = "darkred", size = 1.5) +
+  geom_jitter(size = 2, alpha = 0.6, width = 0.4) +
+  stat_summary(fun = median, geom = "point", size = 8)
+```
+
+``` {r message=FALSE, warning=FALSE}
+library(ggplot2)
+library(dplyr)
+library(stringr)
+
+# srednia dzietnosci dla poszczegolnych regionow
+grupy = group_by(dane_regiony, region)
+grupy_summary =  summarize(grupy, srednia = mean(values))
+
+# obciecie wystających wartosci dla lepszej widocznosci histogramow
+dane_regiony2 = arrange(dane_regiony, desc(values))
+dane_regiony2 = dane_regiony2[-c(1:7), ]
+
+ggplot(dane_regiony2, aes(x=values, fill = region)) +
+  scale_fill_manual(values = c("tomato", "coral4", "chartreuse4", "dodgerblue3", "violetred3")) +
+  geom_histogram(data=subset(dane_regiony2, region == 'Europa Południowa'), alpha = 0.4, binwidth = 0.05) +
+  geom_histogram(data=subset(dane_regiony2, region == 'Europa Północna'), alpha = 0.4, binwidth = 0.05) +
+  geom_histogram(data=subset(dane_regiony2, region == 'Europa Zachodnia'), alpha = 0.4, binwidth = 0.05) +
+  geom_histogram(data=subset(dane_regiony2, region == 'Europa Środkowa'), alpha = 0.4, binwidth = 0.05) +
+  geom_histogram(data=subset(dane_regiony2, region == 'Bałkany'), alpha = 0.4, binwidth = 0.05) + 
+  labs(x = "Współczynnik dzietności", y = "Liczba państw", fill = 'Region' ) + 
+  theme(plot.background = element_rect(fill = "gray20"), 
+    panel.background = element_rect(fill = "gray25"), 
+    axis.title = element_text(size = 15, color = "#eeeeee"), 
+    legend.background = element_rect(color = "#222222", fill = "gray30"),  
+    legend.title = element_text(size = 13, colour = "#eeeeee"),
+    legend.text = element_text(size = 12, colour = "#eeeeee"),
+    axis.text = element_text(size = 12, color = "#eeeeee"),
+    axis.title.x = element_text(vjust = 0))
+```
+
+``` {r message=FALSE, warning=FALSE}
+library(eurostat)
+library(ggplot2)
+library(dplyr)
+library(stringr)
+
+dane2010 = get_eurostat("tgs00100", type = "code", time_format = "date", filters = list(time = 2010))
+dane2012 = get_eurostat("tgs00100", type = "code", time_format = "date", filters = list(time = 2012))
+dane2014 = get_eurostat("tgs00100", type = "code", time_format = "date", filters = list(time = 2014))
+dane2016 = get_eurostat("tgs00100", type = "code", time_format = "date", filters = list(time = 2016))
+dane2018 = get_eurostat("tgs00100", type = "code", time_format = "date", filters = list(time = 2018))
+
+dane2010 = mutate(dane2010, country = str_sub(geo, 1, 2))
+dane2012 = mutate(dane2012, country = str_sub(geo, 1, 2))
+dane2014 = mutate(dane2014, country = str_sub(geo, 1, 2))
+dane2016 = mutate(dane2016, country = str_sub(geo, 1, 2))
+dane2018 = mutate(dane2018, country = str_sub(geo, 1, 2))
+
+pattern = c("BG" = "Bałkany", "EL" = "Europa Południowa",  "HR" = "Bałkany", "SI" = "Bałkany", "RS" = "Bałkany", "ME" = "Bałkany", "MK" = "Bałkany", "IT" = "Europa Południowa", "AL" = "Bałkany", "MT" = "Europa Południowa", "DK" = "Europa Północna", "NO" = "Europa Północna", "FI" = "Europa Północna", "SE" = "Europa Północna", "IS" = "Europa Północna", "IE" = "Europa Zachodnia", "BE" = "Europa Zachodnia", "UK" = "Europa Zachodnia", "FR" = "Europa Zachodnia", "LU" = "Europa Zachodnia", "NL" = "Europa Zachodnia", "ES" = "Europa Południowa", "CY" = "Europa Południowa", "PT" = "Europa Południowa","CZ" = "Europa Środkowa", "DE" = "Europa Środkowa", "PL" = "Europa Środkowa", "AT" = "Europa Środkowa", "HU" = "Europa Środkowa", "SK" = "Europa Środkowa", "LI" = "Europa Środkowa", "CH" = "Europa Zachodnia", "SI" = "Europa Środkowa", "EE" = "Europa Północna", "LT" = "Europa Północna", "LV" = "Europa Północna", "RO" = "Bałkany", "TR" = "Europa Południowa")
+
+dane2010 = mutate(dane2010, region = str_replace_all(country, pattern))
+dane2012 = mutate(dane2012, region = str_replace_all(country, pattern))
+dane2014 = mutate(dane2014, region = str_replace_all(country, pattern))
+dane2016 = mutate(dane2016, region = str_replace_all(country, pattern))
+dane2018 = mutate(dane2018, region = str_replace_all(country, pattern))
+
+dane2010_grouped = group_by(dane2010, region)
+dane2012_grouped = group_by(dane2012, region)
+dane2014_grouped = group_by(dane2014, region)
+dane2016_grouped = group_by(dane2016, region)
+dane2018_grouped = group_by(dane2018, region)
+
+summary2010 = summarize(dane2010_grouped, srednia = as.numeric(mean(values, na.rm = TRUE)))
+summary2012 = summarize(dane2012_grouped, srednia = as.numeric(mean(values, na.rm = TRUE)))
+summary2014 = summarize(dane2014_grouped, srednia = as.numeric(mean(values, na.rm = TRUE)))
+summary2016 = summarize(dane2016_grouped, srednia = as.numeric(mean(values, na.rm = TRUE)))
+summary2018 = summarize(dane2018_grouped, srednia = as.numeric(mean(values, na.rm = TRUE)))
+
+balkany = as.data.frame(matrix(as.numeric(c(summary2010[1, 2],
+                 summary2012[1, 2], summary2014[1, 2],
+                 summary2016[1, 2], summary2018[1, 2])), 
+                 ncol=1,byrow=TRUE))
+
+europa_pd = as.data.frame(matrix(as.numeric(c(summary2010[2, 2],
+                   summary2012[2, 2], summary2014[2, 2],
+                   summary2016[2, 2], summary2018[2, 2])), 
+                   ncol=1,byrow=TRUE))
+
+europa_pn = as.data.frame(matrix(as.numeric(c(summary2010[3, 2],
+                   summary2012[3, 2], summary2014[3, 2],
+                   summary2016[3, 2], summary2018[3, 2])), 
+                   ncol=1,byrow=TRUE))
+
+europa_sr = as.data.frame(matrix(as.numeric(c(summary2010[4, 2],
+                   summary2012[4, 2], summary2014[4, 2],
+                   summary2016[4, 2], summary2018[4, 2])), 
+                   ncol=1,byrow=TRUE))
+
+europa_zach = as.data.frame(matrix(as.numeric(c(summary2010[5, 2],
+                   summary2012[5, 2], summary2014[5, 2],
+                   summary2016[5, 2], summary2018[5, 2])), 
+                   ncol=1,byrow=TRUE))
+
+europa_pn = mutate(europa_pn, rok = as.character(c(2010, 2012, 2014, 2016, 2018)))
+europa_pd = mutate(europa_pd, rok = as.character(c(2010, 2012, 2014, 2016, 2018)))
+europa_sr = mutate(europa_sr, rok = as.character(c( 2010, 2012, 2014, 2016, 2018)))
+europa_zach = mutate(europa_zach, rok = as.character(c(2010, 2012, 2014, 2016, 2018)))
+balkany = mutate(balkany, rok =as.character(c(2010, 2012, 2014, 2016, 2018)))
+
+colnames(balkany) = c("srednia", "rok")
+colnames(europa_sr) = c("srednia", "rok")
+colnames(europa_pd) = c("srednia", "rok")
+colnames(europa_zach) = c("srednia", "rok")
+colnames(europa_pn) = c("srednia", "rok")
+
+europa_pn = mutate(europa_pn, region = "Europa Północna")
+europa_pd = mutate(europa_pd, region = "Europa Południowa")
+europa_sr = mutate(europa_sr, region = "Europa Środkowa")
+europa_zach = mutate(europa_zach, region = "Europa Zachodnia")
+balkany= mutate(balkany, region = "Balkany")
+
+regiony = rbind(europa_pn, balkany, europa_pd, europa_zach, europa_sr)
+
+ggplot(regiony, aes(rok, srednia, group = region, color = region)) + 
+  geom_line(size = 1.8) + 
+  labs(x = element_blank(), y = "Współczynnik dzietności", col = "Region") +
+  theme(plot.background = element_rect(fill = "gray20"), 
+    panel.background = element_rect(fill = "gray25"), 
+    axis.title = element_text(size = 15, color = "#eeeeee"), 
+    plot.title = element_text(size = 18, color = "#eeeeee",
+                              vjust = 2, hjust = 0.5), 
+    legend.background = element_rect(color = "#222222", fill = "gray25"),  
+    legend.title = element_text(size = 13, color = "#eeeeee"),
+    legend.text = element_text(size = 12, color = "#eeeeee"),
+    legend.key = element_rect(fill = "#777777"),
+    axis.text = element_text(size = 12, color = "#eeeeee"),
+    axis.title.x = element_text(vjust = 0))
+```
+
 ## **6. Wspólczynnik dzietnosci we Francji**
 Mateusz napisz
+
+``` {r message=FALSE, warning=FALSE}
+library(eurostat)
+library(stringr)
+library(dplyr)
+library(ggplot2)
+
+fr = select(fr, Data = `time`, Wartość = `values`)
+fr$Data = str_replace(fr$Data, "-01-01", "")
+
+ggplot(fr, aes(Data, Wartość, group = 1)) + geom_line(color = 'dodgerblue3', size = 1.5) +
+  ylim(1.5, 2.3) + labs(y = "Współczynnik dzietności") +
+  theme(plot.background = element_rect(fill = "gray25"), 
+        panel.background = element_rect(fill = "gray20"),
+        axis.title.x = element_blank(),
+        axis.title = element_text(size = 15, color = "#eeeeee"), 
+        axis.text = element_text(size = 12,  color = "#eeeeee"))
+
+```
 
 ## **7. Podsumowanie**
 blabla
