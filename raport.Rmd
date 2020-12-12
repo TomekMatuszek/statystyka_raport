@@ -14,7 +14,7 @@ output:
 Celem niniejszej analizy jest scharakteryzowanie współczynnika dzietności w 37 krajach Europy podzielonych na **jednostki NUTS 2**, dla których Eurostat zbiera dane w tej dziedzinie. Dane dotyczą roku 2018, a także trendów zmian od końca XX wieku. W pierwszym etapie przeprowadzono analizę dla wszystkich jednostek, a następnie w podziale na regiony kontynentu (Europę Północną, Zachodnią, Środkową, Południową oraz Bałkany). Mapę obrazującą dokonany przez autorów podział Europy na regiony udostępniono <a href="https://dl.dropboxusercontent.com/s/jval7cjcnwikmn0/Legenda.jpg?dl=0" target="_blank">tutaj</a>. Na końcu pracy pochylono się nad współczynnikiem dzietności we Francji – kraju, który w pozytywny sposób wyróżnia się na tle innych europejskich państw w tej kwestii.
 
 ## **2. Dane**
-Analizę przeprowadzono w oparciu o dane dotyczące współczynnika dzietności w krajach europejskich dostępnych na stronie Eurostatu. Dane te dostarczają informacji o liczbie dzieci, które przeciętna kobieta rodzi w swoim życiu w podziale na jednostki NUTS2. <a href="https://ec.europa.eu/eurostat/databrowser/view/demo_r_frate2/default/table?lang=en" target="_blank">Link do danych</a>
+Analizę przeprowadzono w oparciu o dane dotyczące współczynnika dzietności w krajach europejskich dostępnych na stronie Eurostatu (<a href="https://ec.europa.eu/eurostat/databrowser/view/demo_r_frate2/default/table?lang=en" target="_blank">odnośnik</a>). Dane te dostarczają informacji o liczbie dzieci, które przeciętna kobieta rodzi w swoim życiu w podziale na jednostki NUTS2.
 
 ```{r message=FALSE, warning=FALSE}
 library(eurostat)
@@ -28,7 +28,7 @@ fr = get_eurostat("demo_r_frate2", type = "code", time_format = "date",
 ```
 
 ## **3. Metody**
-Analiza statystyczna danych została wykonana w środowisku R. Podczas analizy i wizualizacji wyników wykorzystano funkcje zawarte w pakietach podstawowych oraz użyto następujących pakietów:
+Analiza statystyczna danych została wykonana w środowisku R. Podczas analizy i wizualizacji wyników wykorzystano funkcje zawarte w pakietach podstawowych, a także zewnętrznych, do których zaliczają się:
 
 - `eurostat` - umożliwia pobranie danych dostępnych w bazach Eurostatu
 - `ggplot2` - wizualizuje dane tworząc wykresy
