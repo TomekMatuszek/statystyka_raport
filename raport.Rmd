@@ -11,7 +11,7 @@ output:
 ## **1. Wprowadzenie**
 **Współczynnik dzietności** (ang. *fertility rate*) określa przeciętną liczbę dzieci, którą urodziłaby kobieta w ciągu całego okresu rozrodczego (15-49 lat), przy założeniu, że w poszczególnych fazach tego okresu rodziłaby z intensywnością obserwowaną wśród kobiet w badanym roku. Przyjmuje się, iż współczynnik dzietności między 2,10 a 2,15 jest wartością zapewniającą prostą zastępowalność pokoleń (czyli utrzymanie liczby ludności populacji).
 
-Celem niniejszej analizy jest scharakteryzowanie współczynnika dzietności w 37 krajach Europy podzielonych na **jednostki NUTS 2**, dla których Eurostat zbiera dane w tej dziedzinie. Dane dotyczą roku 2018, a także trendów zmian od końca XX wieku. W pierwszym etapie przeprowadzono analizę dla wszystkich jednostek, a następnie w podziale na regiony kontynentu (Europę Północną, Zachodnią, Środkową, Południową oraz Bałkany). Mapę obrazującą dokonany przez autorów podział Europy na regiony udostępniono <a href="https://dl.dropboxusercontent.com/s/jval7cjcnwikmn0/Legenda.jpg?dl=0" target="_blank">tutaj</a>.
+Celem niniejszej analizy jest scharakteryzowanie współczynnika dzietności w 37 krajach Europy podzielonych na **jednostki NUTS 2**, dla których Eurostat zbiera dane w tej dziedzinie. Dane dotyczą roku 2018, a także trendów zmian od końca XX wieku. W pierwszym etapie przeprowadzono analizę dla wszystkich jednostek, a następnie w podziale na regiony kontynentu (Europę Północną, Zachodnią, Środkową, Południową oraz Bałkany). (Mapę obrazującą dokonany przez autorów podział Europy na regiony udostępniono <a href="https://dl.dropboxusercontent.com/s/jval7cjcnwikmn0/Legenda.jpg?dl=0" target="_blank">tutaj</a>.) Na końcu pracy pochylono się nad współczynnikiem dzietności we Francji – kraju który w pozytywny sposób wyróżnia się na tle innych europejskich krajów w tej kwestii.
 
 ## **2. Dane**
 Analizę przeprowadzono w oparciu o dane dotyczące współczynnika dzietności w krajach europejskich dostępnych na stronie Eurostatu. Dane te dostarczają informacji o liczbie dzieci, które przeciętna kobieta rodzi w swoim życiu w podziale na jednostki NUTS2. <a href="https://ec.europa.eu/eurostat/databrowser/view/demo_r_frate2/default/table?lang=en" target="_blank">Link do danych</a>
@@ -28,7 +28,7 @@ fr = get_eurostat("demo_r_frate2", type = "code", time_format = "date",
 ```
 
 ## **3. Metody**
-Analiza statystyczna danych została wykonana w środowisku R. Podczas analizy i wizualizacji wyników wykorzystano funkcje zawarte w pakietach podstawowych oraz użyto następujące pakiety:
+Analiza statystyczna danych została wykonana w środowisku R. Podczas analizy i wizualizacji wyników wykorzystano funkcje zawarte w pakietach podstawowych oraz użyto następujących pakietów:
 
 - `eurostat` - umożliwia pobranie danych dostępnych w bazach Eurostatu
 - `ggplot2` - wizualizuje dane tworząc wykresy
@@ -94,6 +94,21 @@ map2
 ```
 
 *Ryc. 1 Mapa rozkładu przestrzennego współczynnika dzietności w Europie wg jednostek NUTS 2 (2018)*
+
+Po analizie powyższej mapy można zauważyć, że w najcięższej sytuacji demograficznej znajdują się regiony w krajach śródziemnomorskich – Hiszpanii, Włoszech i Grecji. Większość regionów ze współczynnikiem dzietności wyższym niż 2 znajduje się w południowo-wschodniej części Turcji. Stosunkowo wysoką dzietność mają także obszary Francji, Irlandii, Szwecji i Rumunii. 
+
+Sytuacja demograficzna Polski na tle jej sąsiadów wygląda dość słabo, chociaż mimo wszystko dzietność w naszym kraju nie jest tak niska jak na południu Europy – w Polsce wynosi ona 1,4, a w Hiszpanii i Włoszech ok. 1,3.
+
+``` {r message=FALSE, warning=FALSE, results='hide'}
+pl = dane[dane$country == "PL", 5]
+mean(pl$values)
+
+es = dane[dane$country == "ES", 5]
+mean(es$values)
+
+it = dane[dane$country == "IT", 5]
+mean(it$values)
+```
 
 ## **5. Charakterystyka współczynnika dzietności w podziale na regiony Europy**
 W niniejszym rozdziale wartości współczynnika dzietności zostały przeanalizowane w podziale na pięć regionów Europy: Europę Południową, Europę Północną, Europę Zachodnią, Europę Środkową oraz Bałkany. Poniższa tabela (tab. 1) przedstawia zestawienie podstawowych statystyk opisowych (średniej, mediany, zakresu), a także maksimum, minimum oraz różnicę pomiędzy trzecim i pierwszym kwartylem (ang. IQR -  *interquartile range*) dla tych poszczególnych regionów. Średnia oraz mediana posiadają bardzo zbliżone wartości dla wszystkich regionów, z wyjątkiem Europy Południowej, do której zaliczono również Turcję. Wysoki współczynnik dzietności Turcji powoduje znacznie większy zakres wartości w Europie Południowej, wpływając na wszystkie pozostałe statystyki – z tego powodu zakres dla Europy Południowej wynosi aż 2,55. Statystyki pozostałych regionów Europy nie wyróżniają się pod żadnym szczególnym względem – są naturalnie zróżnicowane.
@@ -294,7 +309,7 @@ ggplot(regiony, aes(rok, srednia, group = region, color = region)) +
 
 OPISSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
 
-## **6. Współczynnik dzietności we Francji**
+## **6. Współczynnik dzietności we Francji na przestrzeni lat**
 Francja jest jednym z przodowników dzietności w krajach europejskich.  Wraz ze Szwecją, Rumunią, Irlandią i Danią tworzy grupę europejskich krajów o wysokich wskaźnikach dzietności. Analiza Francji w wielu obszarach pomoże uzyskać podstawowe czynniki, wpływające na wielkość wskaźnika dzietności.
 
 ``` {r message=FALSE, warning=FALSE}
@@ -329,7 +344,7 @@ Warty zaznaczenia jest także duży udział w populacji Francji osób z regionó
 Mimo tego, od 2010 odnotowywany jest spadek współczynnika dzietności we Francji. Dodatkowo, ogłoszone odejeście rządu od rozbudowanej polityki pro-rodzinnej prognozuje utrzymanie regresji wskaźnika dzietności we Francji na najbliższe lata.
 
 ## **7. Podsumowanie**
-Przeprowadzona analiza współczynnika dzietności w Europie ukazała, że istnieją pewne regionalne różnice w jego rozkładzie przestrzennym. Państwa śródziemnomorskie okazały się mieć dramatycznie niską zastępowalność pokoleń oraz silnie kontrastować z innym państwem śródziemnomorskim – Turcją. W innych częściach kontynentu zróżnicowanie dzietności jest mniejsze, a także współczynnik ten przyjmuje generalnie wyższe wartości. Najlepiej sytuacja wygląda we Francji, Szwecji, Irlandii oraz wschodniej części Rumunii. Polska na tle Europy jawi się jako kraj o średniej wysokości współczynnika dzietności – jest on niższy niż np. we Francji czy Turcji, jednak sytuacja w naszym kraju nadal wygląda zdecydowanie lepiej niż w Hiszpanii czy Włoszech. 
+Przeprowadzona analiza współczynnika dzietności w Europie ukazała, że istnieją pewne regionalne różnice w jego rozkładzie przestrzennym. Państwa śródziemnomorskie okazały się mieć dramatycznie niską zastępowalność pokoleń oraz silnie kontrastować z innym państwem śródziemnomorskim – Turcją. (ryc. 1, ryc. 2) W innych częściach kontynentu zróżnicowanie dzietności jest mniejsze, a także współczynnik ten przyjmuje generalnie wyższe wartości. Najlepiej sytuacja wygląda we Francji, Szwecji, Irlandii oraz wschodniej części Rumunii. Polska na tle Europy jawi się jako kraj o średniej wysokości współczynnika dzietności – jest on niższy niż np. we Francji czy Turcji, jednak sytuacja w naszym kraju nadal wygląda lepiej niż w Hiszpanii czy Włoszech. 
 
 Generalnie jednak, analiza ta pokazuje, w jak słabej sytuacji demograficznej znalazły się kraje europejskie – w żadnym z nich nie jest zagwarantowana zastępowalność pokoleń. Będzie to prawdopodobnie jeden z kluczowych problemów z jakimi będą borykały się europejskie rządy w nadchodzących dekadach.
 
