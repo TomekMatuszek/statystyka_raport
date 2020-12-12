@@ -105,7 +105,7 @@ map2 = tm_shape(map_data, is.master = TRUE) +
 map2
 ```
 
-*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ryc. 1 Mapa rozkładu przestrzennego współczynnika dzietności w Europie wg jednostek NUTS 2 (2018)*
+*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ryc. 1 Mapa rozkładu przestrzennego współczynnika dzietności w Europie wg jednostek NUTS 2 (2018)*
 
 Po analizie powyższej mapy można zauważyć, że w najcięższej sytuacji demograficznej znajdują się regiony w krajach śródziemnomorskich – Hiszpanii, Włoszech i Grecji. Większość regionów ze współczynnikiem dzietności wyższym niż 2 znajduje się w południowo-wschodniej części Turcji. Stosunkowo wysoką dzietność mają także obszary Francji, Irlandii, Szwecji i Rumunii. 
 
@@ -179,7 +179,7 @@ ggplot(dane_regiony, aes(x = region, y = values, col = region)) +
   coord_flip() + scale_color_manual(values = c("tomato", "coral4", "chartreuse4", "dodgerblue3", "violetred3")) +
   ylim(0.25, 3.75) +
   #geom_boxplot(col = "black") +
-  labs(y = "Wspolczynnik dzietnosci", x = element_blank(), col = "Region") +
+  labs(y = "Współczynnik dzietności", x = element_blank(), col = "Region") +
   theme(legend.position = "none", 
         plot.background = element_rect(fill = "gray20"), 
         panel.background = element_rect(fill = "gray25"),
