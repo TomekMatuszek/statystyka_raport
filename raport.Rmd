@@ -66,7 +66,7 @@ Według danych pozyskanych z Eurostatu, współczynnik dzietności w krajach Eur
 
 Rozkład przestrzenny tych wartości zobrazowano na poniższej mapie (ryc. 1). Przedstawia ona jednostki NUTS 2 wraz z wartościami współczynnika dzietności. Pod legendą dodano także histogram dla omawianych danych.
 
-```{r message=FALSE, warning=FALSE}
+```{r fig1, message=FALSE, warning=FALSE, fig.height = 6, fig.align = "center"}
 #install.packages("tmap")
 library(tmap)
 library(dplyr)
@@ -105,7 +105,7 @@ map2 = tm_shape(map_data, is.master = TRUE) +
 map2
 ```
 
-*Ryc. 1 Mapa rozkładu przestrzennego współczynnika dzietności w Europie wg jednostek NUTS 2 (2018)*
+*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ryc. 1 Mapa rozkładu przestrzennego współczynnika dzietności w Europie wg jednostek NUTS 2 (2018)*
 
 Po analizie powyższej mapy można zauważyć, że w najcięższej sytuacji demograficznej znajdują się regiony w krajach śródziemnomorskich – Hiszpanii, Włoszech i Grecji. Większość regionów ze współczynnikiem dzietności wyższym niż 2 znajduje się w południowo-wschodniej części Turcji. Stosunkowo wysoką dzietność mają także obszary Francji, Irlandii, Szwecji i Rumunii. 
 
@@ -130,7 +130,7 @@ mean(it$values)
 ## **5. Charakterystyka współczynnika dzietności w podziale na regiony Europy**
 W niniejszym rozdziale wartości współczynnika dzietności zostały przeanalizowane w podziale na pięć regionów Europy: Europę Południową, Europę Północną, Europę Zachodnią, Europę Środkową oraz Bałkany. Poniższa tabela (tab. 1) przedstawia zestawienie podstawowych statystyk opisowych (średniej, mediany, zakresu), a także maksimum, minimum oraz różnicę pomiędzy trzecim i pierwszym kwartylem (ang. IQR -  *interquartile range*) dla tych poszczególnych regionów. Średnia oraz mediana posiadają bardzo zbliżone wartości dla wszystkich regionów, z wyjątkiem Europy Południowej, do której zaliczono również Turcję. Wysoki współczynnik dzietności Turcji powoduje znacznie większy zakres wartości w Europie Południowej, wpływając na wszystkie pozostałe statystyki – z tego powodu zakres dla Europy Południowej wynosi aż 2,55. Statystyki pozostałych regionów Europy nie wyróżniają się pod żadnym szczególnym względem – są naturalnie zróżnicowane.
 
-```{r message=FALSE, warning=FALSE}
+```{r fig2, message=FALSE, warning=FALSE, fig.align = "center"}
 library(kableExtra)
 library(dplyr)
 library(stringr)
@@ -163,7 +163,7 @@ kable_material_dark(tabela, html_font = "Arial", full_width = T)
 
 *Tab. 1 Statystyki opisowe dla dzietności w 2018 roku w podziale na regiony*
 
-```{r message=FALSE, warning=FALSE}
+```{r fig3, message=FALSE, warning=FALSE, fig.align = "center"}
 library(ggplot2)
 library(dplyr)
 library(stringr)
@@ -190,9 +190,9 @@ ggplot(dane_regiony, aes(x = region, y = values, col = region)) +
   stat_summary(fun = median, geom = "point", size = 6)
 ```
 
-*Ryc. 2 Rozrzut wartości współczynnika dzietności w podziale na regiony Europy. Każda mała kropka to jedna jednostka NUTS, a większe punkty to wartość mediany dla danego regionu. Medianę dla całego kontynentu obrazuje gruba czerwona linia.* 
+*Ryc. 2 Rozrzut wartości współczynnika dzietności w podziale na regiony Europy. Każda mała kropka to jedna jednostka NUTS, a większe punkty &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to wartość mediany dla danego regionu. Medianę dla całego kontynentu obrazuje pionowa, czerwona linia.* 
 
-``` {r message=FALSE, warning=FALSE}
+``` {r fig4, message=FALSE, warning=FALSE, fig.align = "center"}
 library(ggplot2)
 library(dplyr)
 library(stringr)
@@ -219,11 +219,11 @@ ggplot(dane_regiony, aes(x=values, fill = region)) +
     axis.title.x = element_text(vjust = 0))
 ```
 
-*Ryc. 3 Nałożone na siebie histogramy obrazujące rozkład wartości współczynnika dzietności dla poszczególnych regionów Europy.*
+*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ryc. 3 Nałożone na siebie histogramy obrazujące rozkład wartości współczynnika dzietności dla poszczególnych regionów Europy.*
 
 Analizując powyższe wykresy (ryc. 2, ryc. 3) można zauważyć, że większość regionów Europy ma w miarę równomierny rozkład wartości współczynnika dzietności, a także medianę zbliżoną do mediany całego kontynentu. Jedynym regionem, którego mediana znacząco się różni od mediany europejskiej jest Europa Południowa. Hiszpania, Włochy i Grecja są bowiem krajami, w których żadnym regionie współczynnik dzietności nie przekracza 1,4. (ryc. 1) Europa Południowa ma też największy rozrzut wartości ze wszystkich regionów z tego powodu, że została do niej zaliczona także Turcja która w przeciwieństwie do innych krajów śródziemnomorskich charakteryzuje się stosunkowo wysoką dzietnością (szczególnie w regionach południowo-wschodnich). Z histogramu można też wywnioskować, że kraje Europy Zachodniej nie mają aż takich problemów z dzietnością jak ich południowi sąsiedzi. Generalnie jednak, rozkład wartości na histogramie można określić jako zbliżony do normalnego.
 
-``` {r message=FALSE, warning=FALSE}
+``` {r fig5, message=FALSE, warning=FALSE, fig.align = "center"}
 library(eurostat)
 library(ggplot2)
 library(dplyr)
@@ -320,14 +320,14 @@ ggplot(regiony, aes(rok, srednia, group = region, color = region)) +
     axis.title.x = element_text(vjust = 0))
 ```
 
-*Ryc. 4 Zmiany współczynnika dzietności w regionach Europy w latach 2010 – 2018.*
+*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ryc. 4 Zmiany współczynnika dzietności w regionach Europy w latach 2010 – 2018.*
 
 Wykres zamieszczony na rycinie 4 ukazuje zmiany współczynnika dzietności w wydzielonych regionach Europy w latach 2010-2018. Zauważalne jest zmniejszenie rozstępu średniej wartości na przestrzeni kolejnych lat. W 2010 roku, różnica między regionem o najwyższym współczynniku dzietności (Europa Zachodnia), a najniższym (Europa Środkowa) wynosiła 0,53. Rozstęp między Europą Zachodnią a Europą Południową w 2018 wynosił natomiast 0,19. Spadek rozstępu podkreśla zmniejszenie wielkości różnic wskaźnika dzietności między krajami europejskimi. Z podanych na wykresie regionów, trzy z nich odnotowują spadek średniej wartości współczynnika dzietności. Są to: Europa Zachodnia, Europa Północna i Europa Południowa. Wzrost średniej wartości współczynnika dzietności zarejestrowano jedynie w Europie Środkowej i na Bałkanach.
 
 ## **6. Współczynnik dzietności we Francji na przestrzeni lat**
 Francja wyróżnia się wysokim współczynnikiem dzietności spośród krajów europejskich. Analiza państwa w wielu obszarach pomoże uzyskać podstawowe czynniki, wpływające na wielkość wskaźnika dzietności.
 
-``` {r message=FALSE, warning=FALSE}
+``` {r fig6, message=FALSE, warning=FALSE, fig.align = "center"}
 library(eurostat)
 library(stringr)
 library(dplyr)
@@ -346,7 +346,7 @@ ggplot(fr, aes(Data, Wartość, group = 1)) + geom_line(color = 'dodgerblue3', s
 
 ```
 
-*Ryc. 5 Zmiany współczynnika dzietności we Francji w latach 1990 – 2018.*
+*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ryc. 5 Zmiany współczynnika dzietności we Francji w latach 1990 – 2018.*
 
  Od lat 20 XX wieku wartość współczynnika dzietności kraju nie spadła poniżej 1,6. Po powojennym wyżu demograficznym, wielkość wskaźnika malała do roku 1995, gdzie osiągnęła wartość 1,7 (ryc. 5). Od tego momentu, współczynnik dzietności Francji wzrastał do 2010. Zanotowano wtedy wartość 2,03. Współczynnik dzietności przekroczył wartość 2,0 pierwszy raz od ponad 30 lat. 
  
