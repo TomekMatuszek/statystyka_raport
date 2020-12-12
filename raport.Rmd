@@ -16,7 +16,7 @@ Celem niniejszej analizy jest scharakteryzowanie współczynnika dzietności w 3
 ## **2. Dane**
 Analizę przeprowadzono w oparciu o dane dotyczące współczynnika dzietności w krajach europejskich dostępnych na stronie Eurostatu. Dane te dostarczają informacji o liczbie dzieci, które przeciętna kobieta rodzi w swoim życiu w podziale na jednostki NUTS2. <a href="https://ec.europa.eu/eurostat/databrowser/view/demo_r_frate2/default/table?lang=en" target="_blank">Link do danych</a>
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 library(eurostat)
 
 fer = search_eurostat(pattern = "fertility rate", type = "table")
