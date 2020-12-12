@@ -312,7 +312,7 @@ ggplot(regiony, aes(rok, srednia, group = region, color = region)) +
 
 *Ryc. 4 Zmiany współczynnika dzietności w regionach Europy w latach 2010 – 2018.*
 
-OPISSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+Wykres zamieszczony na rycinie 4 ukazuje zmiany współczynnika dzietności w wydzielonych regionach Europy w latach 2010-2018. Zauważalne jest zmniejszenie rozstępu średniej wartości na przestrzeni kolejnych lat. W 2010 roku, różnica między regionem o najwyższym współczynniku dzietności (Europa Zachodnia), a najniższym (Europa Środkowa) wynosiła 0,53. Rozstęp między Europą Zachodnią a Europą Południową w 2018 wynosił natomiast 0,19. Spadek rozstępu podkreśla zmniejszenie wielkości różnic wskaźnika dzietności między krajami europejskimi. Z podanych na wykresie regionów, trzy z nich odnotowują spadek średniej wartości współczynnika dzietności. Są to: Europa Zachodnia, Europa Północna i Europa Południowa. Wzrost średniej wartości współczynnika dzietności zarejestrowano jedynie w Europie Środkowej i na Bałkanach.
 
 ## **6. Współczynnik dzietności we Francji na przestrzeni lat**
 Francja jest jednym z przodowników dzietności w krajach europejskich.  Wraz ze Szwecją, Rumunią, Irlandią i Danią tworzy grupę europejskich krajów o wysokich wskaźnikach dzietności. Analiza Francji w wielu obszarach pomoże uzyskać podstawowe czynniki, wpływające na wielkość wskaźnika dzietności.
