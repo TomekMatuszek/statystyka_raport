@@ -1,11 +1,8 @@
 ---
 title: '**Rozkład współczynnika dzietności w Europie**'
 author: '**Tomasz Matuszek, Adrian Nowacki, Mateusz Rydzik**'
-output:
-  html_document:
-    code_folding: hide
-  word_document: default
-  pdf_document: default
+output: github_document
+always_allow_html: true
 ---
 
 ## **1. Wprowadzenie**
